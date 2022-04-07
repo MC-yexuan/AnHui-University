@@ -3,32 +3,32 @@
 #include<string.h>
 using namespace std;
     
-    int k1,k2=0;char word[501];//¼ÇÂ¼n¸ö×ÖÄ¸ ******
-    int num;//ÔªËØ¸öÊı
+    int k1,k2=0;char word[501];//è®°å½•nä¸ªå­—æ¯ ******
+    int num;//å…ƒç´ ä¸ªæ•°
     int all=0;
     char num2;
     ofstream out("output.txt");
     
     int main(){
-    ifstream in("input.txt");//ÒÔ»Ø³µ½áÎ²
+    ifstream in("input.txt");//ä»¥å›è½¦ç»“å°¾
     int eof=in.eof();
     while(!eof)
     {
-        k1++;k2++;//¼ÆÊı
+        k1++;k2++;//è®¡æ•°
         if(k2==1){
-            in >> num;//¶Á³öÔªËØ¸öÊın
-            k1=-2;//´ÓÁã¿ªÊ¼
-            eof=in.eof();//Ö¸ÏòÏÂÒ»¸ö
+            in >> num;//è¯»å‡ºå…ƒç´ ä¸ªæ•°n
+            k1=-2;//ä»é›¶å¼€å§‹
+            eof=in.eof();//æŒ‡å‘ä¸‹ä¸€ä¸ª
         }
-        else if(k2==2){//¹æ±Ü»Ø³µ
+        else if(k2==2){//è§„é¿å›è½¦
             in.get(num2);
             eof=in.eof();
         }
         else{
-        in.get(num2);//È¡³öÎÄ¼şÖĞµÄ×ÖÄ¸
-        eof=in.eof();//Ö¸ÏòÏÂÒ»¸ö
+        in.get(num2);//å–å‡ºæ–‡ä»¶ä¸­çš„å­—æ¯
+        eof=in.eof();//æŒ‡å‘ä¸‹ä¸€ä¸ª
         if(num2=='\n'){eof=1;cout<<endl;}
-        if(eof){break;} //µ½ÎÄ¼şÄ©Î²ÍË³ö
+        if(eof){break;} //åˆ°æ–‡ä»¶æœ«å°¾é€€å‡º
         word[k1]=num2;
         cout << word[k1];
         }      
