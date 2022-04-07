@@ -1,4 +1,4 @@
-//°Ñ×¢ÊÍÈ¥µô¼´ÎªA*Ëã·¨
+//æŠŠæ³¨é‡Šå»æ‰å³ä¸ºA*ç®—æ³•
 #include <iostream>
 #include <queue>
 #include <stack>
@@ -7,16 +7,16 @@
 #include <string.h>
 using namespace std;
 
-class NodeC{ //½ÚµãÀà
+class NodeC{ //èŠ‚ç‚¹ç±»
     public:
-        int Node[3][3];         //Ã¿¸ö½ÚµãÓÃÒ»¸ö¶şÎ¬Êı×é±íÊ¾
-        class NodeC *parent;     //½ÚµãµÄÏÈ±²½Úµã
-        class NodeC *next;       //½ÚµãµÄÀ©Õ¹½Úµã
+        int Node[3][3];         //æ¯ä¸ªèŠ‚ç‚¹ç”¨ä¸€ä¸ªäºŒç»´æ•°ç»„è¡¨ç¤º
+        class NodeC *parent;     //èŠ‚ç‚¹çš„å…ˆè¾ˆèŠ‚ç‚¹
+        class NodeC *next;       //èŠ‚ç‚¹çš„æ‰©å±•èŠ‚ç‚¹
 };
 
-bool cmp(const NodeC &s1, const NodeC &s2){//sortº¯ÊıµÄÅÅĞò¹æÔò£¬·µ»Ø¹À¼Ûº¯ÊıÖµ×î´óµÄ½Úµã
-    int gx1 = 0, gx2 = 0;//gxÎª´Ó³õÊ¼½Úµãµ½¸Ã½ÚµãÒÑ¾­¸¶³öµÄ´ú¼Û
-    int hx1 = 0, hx2 = 0;//hxÎª¸Ã½Úµãµ½´ïÄ¿µÄ½ÚµãµÄ½Ó½ü³Ì¶È¹À¼ÆÖµ
+bool cmp(const NodeC &s1, const NodeC &s2){//sortå‡½æ•°çš„æ’åºè§„åˆ™ï¼Œè¿”å›ä¼°ä»·å‡½æ•°å€¼æœ€å¤§çš„èŠ‚ç‚¹
+    int gx1 = 0, gx2 = 0;//gxä¸ºä»åˆå§‹èŠ‚ç‚¹åˆ°è¯¥èŠ‚ç‚¹å·²ç»ä»˜å‡ºçš„ä»£ä»·
+    int hx1 = 0, hx2 = 0;//hxä¸ºè¯¥èŠ‚ç‚¹åˆ°è¾¾ç›®çš„èŠ‚ç‚¹çš„æ¥è¿‘ç¨‹åº¦ä¼°è®¡å€¼
     const NodeC *ptr1 = &s1;
     const NodeC *ptr2 = &s2;
     int Nodeg[3][3] = {{1,2,3},{8,0,4},{7,6,5}};
@@ -28,7 +28,7 @@ bool cmp(const NodeC &s1, const NodeC &s2){//sortº¯ÊıµÄÅÅĞò¹æÔò£¬·µ»Ø¹À¼Ûº¯ÊıÖµ×
         gx2 += 1;
         ptr2 = ptr2->parent;
     }
-    for(int i = 0; i < 3; i++){//¼ì²é½áµãÊÇ·ñÊ±Ä¿±ê½Úµã
+    for(int i = 0; i < 3; i++){//æ£€æŸ¥ç»“ç‚¹æ˜¯å¦æ—¶ç›®æ ‡èŠ‚ç‚¹
         for(int j = 0; j < 3; j++){
             if(s1.Node[i][j] != Nodeg[i][j]){
                 hx1 += 1;
@@ -41,7 +41,7 @@ bool cmp(const NodeC &s1, const NodeC &s2){//sortº¯ÊıµÄÅÅĞò¹æÔò£¬·µ»Ø¹À¼Ûº¯ÊıÖµ×
     return (gx1+hx1) > (gx2+hx2);
 }
 
-bool IsEqual(NodeC n1,NodeC n2){//ÅĞ¶ÏÁ½¸ö½áµãÊÇ²»ÊÇÏàµÈ
+bool IsEqual(NodeC n1,NodeC n2){//åˆ¤æ–­ä¸¤ä¸ªç»“ç‚¹æ˜¯ä¸æ˜¯ç›¸ç­‰
     for (int i = 0; i < 3;i++)
         for (int j = 0; j < 3;j++)
             if(n1.Node[i][j]!=n2.Node[i][j])
@@ -49,26 +49,26 @@ bool IsEqual(NodeC n1,NodeC n2){//ÅĞ¶ÏÁ½¸ö½áµãÊÇ²»ÊÇÏàµÈ
     return false;
 }
 
-class A_algorithm{//AËã·¨ËÑË÷
+class A_algorithm{//Aç®—æ³•æœç´¢
     public:
-        A_algorithm(NodeC *S0, NodeC *Sg);        //¹¹Ôìº¯Êı
+        A_algorithm(NodeC *S0, NodeC *Sg);        //æ„é€ å‡½æ•°
         int IsSg(NodeC *S) 
         {
             return IsEqual(*S,Sg);
-        } // ÅĞ¶ÏÊÇ·ñÊÇÄ¿±ê×´Ì¬
-        int NextNodeC(NodeC *S);                  // À©Õ¹½áµã
-        void algorithm();                       // AËã·¨
-        void PrintPath(NodeC *head);             // ´òÓ¡Â·¾¶
-        void FreeCLOSED(NodeC *CLOSED);          // ÊÍ·Åclose±í
+        } // åˆ¤æ–­æ˜¯å¦æ˜¯ç›®æ ‡çŠ¶æ€
+        int NextNodeC(NodeC *S);                  // æ‰©å±•ç»“ç‚¹
+        void algorithm();                       // Aç®—æ³•
+        void PrintPath(NodeC *head);             // æ‰“å°è·¯å¾„
+        void FreeCLOSED(NodeC *CLOSED);          // é‡Šæ”¾closeè¡¨
     private:
 
-        NodeC S0;                                //³õÊ¼½Úµã
-        NodeC Sg;                                //Ä¿±ê½Úµã
-        int Nextnum;                             //¿ÉÀ©Õ¹½áµãÊı
-        NodeC ext[4];                           //À©Õ¹½Úµã
+        NodeC S0;                                //åˆå§‹èŠ‚ç‚¹
+        NodeC Sg;                                //ç›®æ ‡èŠ‚ç‚¹
+        int Nextnum;                             //å¯æ‰©å±•ç»“ç‚¹æ•°
+        NodeC ext[4];                           //æ‰©å±•èŠ‚ç‚¹
 };
 
-A_algorithm::A_algorithm(NodeC *S0, NodeC *Sg){//¹¹Ôìº¯Êı
+A_algorithm::A_algorithm(NodeC *S0, NodeC *Sg){//æ„é€ å‡½æ•°
     memcpy(&this->S0.Node, &S0->Node, sizeof(int)*9);
     this->S0.parent = NULL;
     this->S0.next = NULL;
@@ -77,16 +77,16 @@ A_algorithm::A_algorithm(NodeC *S0, NodeC *Sg){//¹¹Ôìº¯Êı
     this->Sg.next = NULL;
 }
 
-int A_algorithm::NextNodeC(NodeC *S){//·µ»Ø¿ÉÀ©Õ¹½ÚµãµÄ¸öÊı
+int A_algorithm::NextNodeC(NodeC *S){//è¿”å›å¯æ‰©å±•èŠ‚ç‚¹çš„ä¸ªæ•°
     Nextnum = 0;
     int posi, posj;
     for (int i = 0; i < 3; i++)
         for (int j = 0;j < 3; j++)
             if(S->Node[i][j] == 0){
-                posi = i;posj = j;//¶¨Î»µ½S½ÚµãµÄ¿ÕÎ»ÖÃ´¦
+                posi = i;posj = j;//å®šä½åˆ°SèŠ‚ç‚¹çš„ç©ºä½ç½®å¤„
                 break;
              }
-    if(posi > 0){//ÏòÉÏÀ©Õ¹
+    if(posi > 0){//å‘ä¸Šæ‰©å±•
         NodeC up = *S;
         up.Node[posi][posj] = up.Node[posi-1][posj];
         up.Node[posi - 1][posj] = 0;
@@ -95,7 +95,7 @@ int A_algorithm::NextNodeC(NodeC *S){//·µ»Ø¿ÉÀ©Õ¹½ÚµãµÄ¸öÊı
         Nextnum++;
 
     }
-    if(posi < 2){//ÏòÏÂÀ©Õ¹
+    if(posi < 2){//å‘ä¸‹æ‰©å±•
         NodeC down = *S;
         down.Node[posi][posj] = down.Node[posi+1][posj];
         down.Node[posi + 1][posj] = 0;
@@ -104,7 +104,7 @@ int A_algorithm::NextNodeC(NodeC *S){//·µ»Ø¿ÉÀ©Õ¹½ÚµãµÄ¸öÊı
         Nextnum++;
 
     }
-    if(posj > 0){//Ïò×óÀ©Õ¹
+    if(posj > 0){//å‘å·¦æ‰©å±•
         NodeC left = *S;
         left.Node[posi][posj] = left.Node[posi][posj-1];
         left.Node[posi][posj - 1] = 0;
@@ -113,7 +113,7 @@ int A_algorithm::NextNodeC(NodeC *S){//·µ»Ø¿ÉÀ©Õ¹½ÚµãµÄ¸öÊı
         Nextnum++;
         
     }
-    if(posj < 2){//ÏòÓÒÀ©Õ¹
+    if(posj < 2){//å‘å³æ‰©å±•
         NodeC right = *S;
         right.Node[posi][posj] = right.Node[posi][posj+1];
         right.Node[posi][posj + 1] = 0;
@@ -127,30 +127,30 @@ int A_algorithm::NextNodeC(NodeC *S){//·µ»Ø¿ÉÀ©Õ¹½ÚµãµÄ¸öÊı
 
 void A_algorithm::algorithm(){
     int step = 0;
-    vector<NodeC> OPEN;//Éú³ÉÒ»¸öNodeCÀàĞÍµÄÊı×éOPEN
+    vector<NodeC> OPEN;//ç”Ÿæˆä¸€ä¸ªNodeCç±»å‹çš„æ•°ç»„OPEN
     NodeC *CLOSED = new NodeC;
     NodeC *current = CLOSED;
     NodeC *N;
-    OPEN.push_back(S0);//°Ñ³õÊ¼½ÚµãS0·ÅÈëOPEN±í
+    OPEN.push_back(S0);//æŠŠåˆå§‹èŠ‚ç‚¹S0æ”¾å…¥OPENè¡¨
 
     while(!OPEN.empty()){
         N = new NodeC;
-        *N = OPEN[OPEN.size()-1]; OPEN.pop_back();//ÒÆ³öOPEN±íµÄ×îºóÒ»¸ö½Úµã
+        *N = OPEN[OPEN.size()-1]; OPEN.pop_back();//ç§»å‡ºOPENè¡¨çš„æœ€åä¸€ä¸ªèŠ‚ç‚¹
         step++;
-        current->next = N;//°ÑN·ÅÈëCLOSED±íÖĞ
-        current = current->next;//Ö¸ÏòN
-        if(IsSg(N) == 0){       //Èç¹ûÄ¿±ê½ÚµãSg=N£¬ÔòËÑË÷³É¹¦£¬½áÊø
-            PrintPath(N);       //´òÓ¡³öN
-            FreeCLOSED(CLOSED); //ÊÍ·ÅCLOSED±í
+        current->next = N;//æŠŠNæ”¾å…¥CLOSEDè¡¨ä¸­
+        current = current->next;//æŒ‡å‘N
+        if(IsSg(N) == 0){       //å¦‚æœç›®æ ‡èŠ‚ç‚¹Sg=Nï¼Œåˆ™æœç´¢æˆåŠŸï¼Œç»“æŸ
+            PrintPath(N);       //æ‰“å°å‡ºN
+            FreeCLOSED(CLOSED); //é‡Šæ”¾CLOSEDè¡¨
             return;
         }
-        int Nextnum = NextNodeC(N);//À©Õ¹N½Úµã£¬²¢È¡N½ÚµãµÄ¿ÉÀ©Õ¹½ÚµãÊı
-        if(Nextnum == 0)//Èç¹ûN²»¿ÉÀ©Õ¹Ôò¼ÌĞø
+        int Nextnum = NextNodeC(N);//æ‰©å±•NèŠ‚ç‚¹ï¼Œå¹¶å–NèŠ‚ç‚¹çš„å¯æ‰©å±•èŠ‚ç‚¹æ•°
+        if(Nextnum == 0)//å¦‚æœNä¸å¯æ‰©å±•åˆ™ç»§ç»­
             continue;
         for(int i = 0; i < Nextnum; i++)
    
             OPEN.push_back(ext[i]);
-        sort(OPEN.begin(), OPEN.end(), cmp);//¶ÔOPEN±íµÄ½Úµã°´ÕÕ¹À¼Ûº¯ÊıµÄÖµ½øĞĞ´Ó´óµ½Ğ¡ÅÅĞò£¬Ã¿´ÎÈ¡¹À¼Ûº¯ÊıÖµ×îĞ¡µÄ½Úµã¼´±íÖĞµÄ×îºóÒ»¸ö½Úµã
+        sort(OPEN.begin(), OPEN.end(), cmp);//å¯¹OPENè¡¨çš„èŠ‚ç‚¹æŒ‰ç…§ä¼°ä»·å‡½æ•°çš„å€¼è¿›è¡Œä»å¤§åˆ°å°æ’åºï¼Œæ¯æ¬¡å–ä¼°ä»·å‡½æ•°å€¼æœ€å°çš„èŠ‚ç‚¹å³è¡¨ä¸­çš„æœ€åä¸€ä¸ªèŠ‚ç‚¹
 
     }
     cout << "Failed." << endl;
@@ -188,8 +188,8 @@ void A_algorithm::FreeCLOSED(NodeC *CLOSED){
 
 int main() {
 
-    NodeC S0 = {{{2, 3, 1}, {8, 0, 4}, {7, 0, 5}}, 0, NULL};//³õÊ¼»¯³õÊ¼½Úµã
-    NodeC Sg = {{{1, 2, 3}, {8, 0, 4}, {7, 6, 5}}, 0, NULL};//³õÊ¼»¯Ä¿±ê½Úµã
+    NodeC S0 = {{{2, 3, 1}, {8, 0, 4}, {7, 0, 5}}, 0, NULL};//åˆå§‹åŒ–åˆå§‹èŠ‚ç‚¹
+    NodeC Sg = {{{1, 2, 3}, {8, 0, 4}, {7, 6, 5}}, 0, NULL};//åˆå§‹åŒ–ç›®æ ‡èŠ‚ç‚¹
     cout << "SearchPath: " << endl<<endl;
     A_algorithm(&S0, &Sg).algorithm();
     return 0;
