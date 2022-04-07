@@ -3,14 +3,14 @@
 #include <stdlib.h>
 using namespace std;
 
-const char *name = "Âí´ŞìÇêÑ";
+const char *name = "é©¬å´”çƒ¨æš„";
 const char *ID = "E01914004";
 
 int data_[9] = {55,58,39,18,90,160,150,38,184};
 int start = 100;
 int move_[9];
 void FCFS(int num){
-    cout << "ÏÈÀ´ÏÈ·şÎñËã·¨£º" << endl;
+    cout << "å…ˆæ¥å…ˆæœåŠ¡ç®—æ³•ï¼š" << endl;
     float total=0;
     for(int i = 0;i < num; i++){
         if(!i){
@@ -22,12 +22,12 @@ void FCFS(int num){
             total += move_[i];
         }
     }
-    printf("´Ó%dºÅ´ÅµÀ¿ªÊ¼\n",start);
+    printf("ä»%då·ç£é“å¼€å§‹\n",start);
     for(int i = 0;i < num; i++){
         cout << data_[i] << "\t" << move_[i] <<endl;
     }
     float ave=total/num;
-    printf("Æ½¾ùÑ°µÀ³¤¶È£º%.1f\n\n",ave);
+    printf("å¹³å‡å¯»é“é•¿åº¦ï¼š%.1f\n\n",ave);
 }
 
 void SSTF(int num)
@@ -38,19 +38,19 @@ void SSTF(int num)
     int midd=0;
     int move1_[9];
     int data1_[9];
-    cout << "×î¶ÌÑ°µÀÓÅÏÈËã·¨£º" << endl;
+    cout << "æœ€çŸ­å¯»é“ä¼˜å…ˆç®—æ³•ï¼š" << endl;
     float total=0;
     for(int i = 0;i < num; i++){
        MC[i]=data_[i];
    } 
     for(int i = 0;i < num; i++){
         if(!i)
-            now=start;//µ±Ç°µØµã
+            now=start;//å½“å‰åœ°ç‚¹
             for(int j = 0;j < num-i; j++){
                 move_[j]=abs(now-MC[j]);
                 if(mid>move_[j])
                 {
-                    mid=move_[j];//ÕÒ×î¶Ì¾àÀë
+                    mid=move_[j];//æ‰¾æœ€çŸ­è·ç¦»
                     move1_[i]=mid;
                     midd=j;
                 }
@@ -61,12 +61,12 @@ void SSTF(int num)
             MC.erase(MC.begin() + midd);
             mid=9999;
    }
-    printf("´Ó%dºÅ´ÅµÀ¿ªÊ¼\n",start);
+    printf("ä»%då·ç£é“å¼€å§‹\n",start);
     for(int i = 0;i < num; i++){
         cout << data1_[i] << "\t" << move1_[i] <<endl;
     }
     float ave=total/num;
-    printf("Æ½¾ùÑ°µÀ³¤¶È£º%.1f\n",ave);
+    printf("å¹³å‡å¯»é“é•¿åº¦ï¼š%.1f\n",ave);
 }
 
 
