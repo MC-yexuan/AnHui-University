@@ -4,64 +4,64 @@
 #include <queue>
 using namespace std;
 
-const char *name = "Âí´ŞìÇêÑ";
+const char *name = "é©¬å´”çƒ¨æš„";
 const char *ID = "E01914004";
 
-//¶¨Òå½ø³Ì½á¹¹ÌåµÄÊôĞÔ
+//å®šä¹‰è¿›ç¨‹ç»“æ„ä½“çš„å±æ€§
 struct process
 {
-    char id;//½ø³ÌÃû
-    int Max[3];//×î×ÊÔ´´óĞèÇó
-    int Allocation[3];//ÒÑ·ÖÅä×ÊÔ´
-    int Need[3];//»¹ĞèÒª¶àÉÙ×ÊÔ´
+    char id;//è¿›ç¨‹å
+    int Max[3];//æœ€èµ„æºå¤§éœ€æ±‚
+    int Allocation[3];//å·²åˆ†é…èµ„æº
+    int Need[3];//è¿˜éœ€è¦å¤šå°‘èµ„æº
 };
 
-int Available[3];//Ê£Óà¿ÉÓÃ×ÊÔ´
-queue<char> safeue;//°²È«¶ÓÁĞ
+int Available[3];//å‰©ä½™å¯ç”¨èµ„æº
+queue<char> safeue;//å®‰å…¨é˜Ÿåˆ—
 
-void BA(vector<process>& processes)//ÒøĞĞ¼ÒËã·¨
+void BA(vector<process>& processes)//é“¶è¡Œå®¶ç®—æ³•
 {
 
-    queue<process*> MC;//¶ÓÁĞÃû×ÖÎªMC
-    int safe=1;//ÏµÍ³°²È«±êÖ¾Î»
+    queue<process*> MC;//é˜Ÿåˆ—åå­—ä¸ºMC
+    int safe=1;//ç³»ç»Ÿå®‰å…¨æ ‡å¿—ä½
     for (int i = 0; i < processes.size(); i++)
     {
-        MC.push(&processes[i]);//ËùÓĞ½ø³ÌÒÔÖ¸ÕëĞÎÊ½Èë¶Ó
+        MC.push(&processes[i]);//æ‰€æœ‰è¿›ç¨‹ä»¥æŒ‡é’ˆå½¢å¼å…¥é˜Ÿ
     }
 
-    while (!MC.empty())//¶ÓÁĞ·Ç¿Õ
+    while (!MC.empty())//é˜Ÿåˆ—éç©º
     {
-        int size=MC.size();//±£´æµ±Ç°¶ÓÁĞ´óĞ¡
+        int size=MC.size();//ä¿å­˜å½“å‰é˜Ÿåˆ—å¤§å°
         
         for (int i = 0; i < size; i++)
         {   
-            int flag=1;//±êÖ¾Î» ÅĞ¶Ï½ø³ÌÊÇ·ñ¿ÉÒÔµÃµ½×ÊÔ´·ÖÅä
+            int flag=1;//æ ‡å¿—ä½ åˆ¤æ–­è¿›ç¨‹æ˜¯å¦å¯ä»¥å¾—åˆ°èµ„æºåˆ†é…
             for(int j = 0; j < 3; j++)
             {
-                if(MC.front()->Need[j] > Available[j])//¿É·ÖÅä×ÊÔ´²»×ã
+                if(MC.front()->Need[j] > Available[j])//å¯åˆ†é…èµ„æºä¸è¶³
                 {
-                    flag=0;//±êÖ¾Î»ÖÃ0£¬±íÊ¾¸Ã½ø³Ì²»¿É±»·ÖÅä×ÊÔ´
-                    break;//Ìø³öforÑ­»·
+                    flag=0;//æ ‡å¿—ä½ç½®0ï¼Œè¡¨ç¤ºè¯¥è¿›ç¨‹ä¸å¯è¢«åˆ†é…èµ„æº
+                    break;//è·³å‡ºforå¾ªç¯
                 }      
             }
 
-            if(flag)//½ø³Ì¿É±»·ÖÅä
+            if(flag)//è¿›ç¨‹å¯è¢«åˆ†é…
             {
                 for(int j = 0; j < 3;j++)
                 {
-                    Available[j] = Available[j]+processes[i].Allocation[j];//¸üĞÂ¿É·ÖÅä×ÊÔ´
+                    Available[j] = Available[j]+processes[i].Allocation[j];//æ›´æ–°å¯åˆ†é…èµ„æº
                 }
                 safeue.push(MC.front()->id);
-                MC.pop();//¶ÓÁĞÖĞÉ¾³ı¸Ã½ø³Ì
+                MC.pop();//é˜Ÿåˆ—ä¸­åˆ é™¤è¯¥è¿›ç¨‹
             }
-            else //Î´±»·ÖÅä£¬ÖØĞÂÈë¶Ó
+            else //æœªè¢«åˆ†é…ï¼Œé‡æ–°å…¥é˜Ÿ
             {
                 process *mid=MC.front();
                 MC.pop();
                 MC.push(mid);
             }
         }
-        if(MC.size()==size)//Ã»ÓĞÈÎºÎ½ø³Ì³ö¶Ó,ÏµÍ³²»°²È«
+        if(MC.size()==size)//æ²¡æœ‰ä»»ä½•è¿›ç¨‹å‡ºé˜Ÿ,ç³»ç»Ÿä¸å®‰å…¨
             {
                 safe=0;
                 break;
@@ -70,7 +70,7 @@ void BA(vector<process>& processes)//ÒøĞĞ¼ÒËã·¨
 
     if(safe)
         {
-            cout<<"°²È«ĞòÁĞÎª£º";
+            cout<<"å®‰å…¨åºåˆ—ä¸ºï¼š";
             while (!safeue.empty())
             {
                 cout << safeue.front() << ' ';
@@ -80,11 +80,11 @@ void BA(vector<process>& processes)//ÒøĞĞ¼ÒËã·¨
         }
     else
         {
-            cout<<"¸ÃÏµÍ³²»°²È«"<<endl;
+            cout<<"è¯¥ç³»ç»Ÿä¸å®‰å…¨"<<endl;
         }
 }
 
-void Print(vector<process>& processes)//Êä³öº¯Êı 
+void Print(vector<process>& processes)//è¾“å‡ºå‡½æ•° 
 {
     cout << "ID" << '\t' << " Max " << '\t' << "Allocation" << '\t' << "Need" << endl;
     for (int i = 0; i < processes.size(); i++)
@@ -110,14 +110,14 @@ void Print(vector<process>& processes)//Êä³öº¯Êı
 
 int main()
 {
-    //ÊäÈë´Óinput.txt»ñÈ¡
+    //è¾“å…¥ä»input.txtè·å–
     freopen("input.txt", "r", stdin);
     cout << ID<<" "<<name << endl;
     int processnum;
-    cout << "ÇëÊäÈë½ø³ÌµÄÊıÁ¿" << endl;
+    cout << "è¯·è¾“å…¥è¿›ç¨‹çš„æ•°é‡" << endl;
     cin >> processnum;
-    cout << "ÇëÏÈÊäÈë¿ÉÀûÓÃ×ÊÔ´£¬Ö®ºóÒÀ´ÎÊäÈëÒ»¸ö½ø³ÌµÄÃû×Ö¡¢ÒÑ·ÖÅä×ÊÔ´ºÍ»¹Ğè×ÊÔ´:" << endl;
-    vector<process> processes(processnum);//½¨Á¢ÏòÁ¿
+    cout << "è¯·å…ˆè¾“å…¥å¯åˆ©ç”¨èµ„æºï¼Œä¹‹åä¾æ¬¡è¾“å…¥ä¸€ä¸ªè¿›ç¨‹çš„åå­—ã€å·²åˆ†é…èµ„æºå’Œè¿˜éœ€èµ„æº:" << endl;
+    vector<process> processes(processnum);//å»ºç«‹å‘é‡
     for (int i = 0; i < 3; i++)
     {
         cin >> Available[i];
@@ -137,7 +137,7 @@ int main()
         }  
     }
 
-    cout << "ÒøĞĞ¼ÒËã·¨£º"<< endl;  
+    cout << "é“¶è¡Œå®¶ç®—æ³•ï¼š"<< endl;  
     BA(processes);
     Print(processes);
     system("Pause");
