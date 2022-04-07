@@ -2,13 +2,13 @@
 #include<cstring>
 #include<cmath>
 using namespace std;
-const char *name = "Âí´ŞìÇêÑ";
+const char *name = "é©¬å´”çƒ¨æš„";
 const char *ID = "E01914004";
 class Matrix{
     public:
     Matrix();
     Matrix(int r,int l);
-    Matrix(const Matrix &r); //¿½±´¹¹Ôìº¯Êı
+    Matrix(const Matrix &r); //æ‹·è´æ„é€ å‡½æ•°
     ~Matrix();
     void SetValue(int i,int j,double value);
     double GetValue(int i,int j);
@@ -56,17 +56,17 @@ Matrix::Matrix(int r,int l){
 
 Matrix::~Matrix(){
         if(pValue)
-        delete []pValue;  //ÊÇÊı×é¼Ó[]
+        delete []pValue;  //æ˜¯æ•°ç»„åŠ []
     }
 
-Matrix::Matrix(const Matrix &r):rows(r.rows),cols(r.cols){ //Éî¿½±´
+Matrix::Matrix(const Matrix &r):rows(r.rows),cols(r.cols){ //æ·±æ‹·è´
     pValue=new double[rows*cols];
     for(int i=0;i<rows*cols;++i)
         pValue[i] = r.pValue[i];
     }
 
-Matrix& Matrix::operator=(const Matrix &r){  //¸³Öµ
-    if(this!=&r){//Óër²»ÏàµÈ
+Matrix& Matrix::operator=(const Matrix &r){  //èµ‹å€¼
+    if(this!=&r){//ä¸rä¸ç›¸ç­‰
         rows = r.rows; cols = r.cols;
         delete []pValue;
         pValue = new double [rows*cols];
@@ -88,23 +88,23 @@ double Matrix::GetValue(int i,int j){
 
 Matrix Matrix::Multiply(Matrix &r){
         if(cols!=r.rows){
-           Matrix newMarix;//µ÷ÓÃÄ¬ÈÏ¹¹Ôìº¯Êı£¬·µ»Ø¿Õ¾ØÕó
+           Matrix newMarix;//è°ƒç”¨é»˜è®¤æ„é€ å‡½æ•°ï¼Œè¿”å›ç©ºçŸ©é˜µ
            return newMarix; 
         }
         else{
-            Matrix newMarix(rows,r.cols);   //ĞÂ¾ØÕó£¬ĞĞÎª×ó³ËĞĞÊı£¬ÁĞÎªÓÒ³ËÁĞÊı
-            int flag1=0;int flag2=0;        //Á½¸ö¼ÆÊıÖ¸Õë£¬flag2Îª×ó³Ë¾ØÕóÄ³ĞĞÔªËØµÄÁĞÊı£¬flag1ÎªÓÒ³Ë¾ØÕóµÄÁĞÊı
+            Matrix newMarix(rows,r.cols);   //æ–°çŸ©é˜µï¼Œè¡Œä¸ºå·¦ä¹˜è¡Œæ•°ï¼Œåˆ—ä¸ºå³ä¹˜åˆ—æ•°
+            int flag1=0;int flag2=0;        //ä¸¤ä¸ªè®¡æ•°æŒ‡é’ˆï¼Œflag2ä¸ºå·¦ä¹˜çŸ©é˜µæŸè¡Œå…ƒç´ çš„åˆ—æ•°ï¼Œflag1ä¸ºå³ä¹˜çŸ©é˜µçš„åˆ—æ•°
             for(int i=0;i<rows*r.cols;i++){
-                for(int j=0;j<cols;j++){    //Ïà¼ÓµÃÒ»¸öĞÂ¾ØÕóµÃÔªËØ£¨¼ÓÔ­¾ØÕóÁĞÊı´Î£©
-                    newMarix.pValue[i]=newMarix.pValue[i]+pValue[flag2]*r.pValue[j*r.cols+flag1];//ÀÛ¼Ó¹ı³Ì
+                for(int j=0;j<cols;j++){    //ç›¸åŠ å¾—ä¸€ä¸ªæ–°çŸ©é˜µå¾—å…ƒç´ ï¼ˆåŠ åŸçŸ©é˜µåˆ—æ•°æ¬¡ï¼‰
+                    newMarix.pValue[i]=newMarix.pValue[i]+pValue[flag2]*r.pValue[j*r.cols+flag1];//ç´¯åŠ è¿‡ç¨‹
                     flag2++;
                     }
                 flag1++;
-                if(flag1>=r.cols){          //ĞÂ¾ØÕóµÄÒ»ÕûĞĞÒÑµÃ³ö¡£flag1ÖÃÁãÇóÏÂÒ»ĞĞ,flag2Ö¸Ïò×ó³Ë¾ØÕóÏÂÒ»ĞĞ¡£
+                if(flag1>=r.cols){          //æ–°çŸ©é˜µçš„ä¸€æ•´è¡Œå·²å¾—å‡ºã€‚flag1ç½®é›¶æ±‚ä¸‹ä¸€è¡Œ,flag2æŒ‡å‘å·¦ä¹˜çŸ©é˜µä¸‹ä¸€è¡Œã€‚
                     flag1=0;
                     flag2=flag2+cols;
                     }
-                else flag2=0;               //Çó¸ÃĞĞµÄÏÂÒ»¸öÔªËØ
+                else flag2=0;               //æ±‚è¯¥è¡Œçš„ä¸‹ä¸€ä¸ªå…ƒç´ 
             }           
         return newMarix;
         }
