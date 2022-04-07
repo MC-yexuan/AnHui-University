@@ -8,10 +8,10 @@
 #define overflow -2
 typedef int Status;
 
-#define m 16        //É¢ÁĞ±íµÄ±í³¤
+#define m 16        //æ•£åˆ—è¡¨çš„è¡¨é•¿
 typedef struct Hash{
-int key;   //¹Ø¼ü×ÖÏî
-int otherinfo;  //ÆäËûÊı¾İÏî
+int key;   //å…³é”®å­—é¡¹
+int otherinfo;  //å…¶ä»–æ•°æ®é¡¹
 }HashTable [m];
 
 int H(int key)
@@ -20,23 +20,23 @@ return (key%13);
 } 
 
 #define NULLKEY 0
-//µ¥ÔªÎª¿ÕµÄ±ê¼Ç
+//å•å…ƒä¸ºç©ºçš„æ ‡è®°
 int SearchHash004 (HashTable HT, int key)
-{//ÔÚÉ¢ÁĞ±íHTÖĞ²éÕÒ¹Ø¼ü×ÖÎªkeyµÄÔªËØ£¬Èô²éÕÒ³É¹¦£¬·µ»ØÉ¢ÁĞ±íµÄµ¥Ôª±êºÅ£¬·ñÔò·µ»Ø-1
+{//åœ¨æ•£åˆ—è¡¨HTä¸­æŸ¥æ‰¾å…³é”®å­—ä¸ºkeyçš„å…ƒç´ ï¼Œè‹¥æŸ¥æ‰¾æˆåŠŸï¼Œè¿”å›æ•£åˆ—è¡¨çš„å•å…ƒæ ‡å·ï¼Œå¦åˆ™è¿”å›-1
 int H0,Hi;
 H0=H(key) ;
-//¸ù¾İÉ¢ÁĞº¯ÊıH (key)¼ÆËãÉ¢ÁĞµØÖ·
+//æ ¹æ®æ•£åˆ—å‡½æ•°H (key)è®¡ç®—æ•£åˆ—åœ°å€
 if (HT [H0].key==NULLKEY) return -1;
-//Èôµ¥ÔªHOÎª¿Õ£¬ÔòËù²éÔªËØ²»´æÔÚ
+//è‹¥å•å…ƒHOä¸ºç©ºï¼Œåˆ™æ‰€æŸ¥å…ƒç´ ä¸å­˜åœ¨
 else if (HT[H0].key==key) return H0;
-//Èôµ¥ÔªHOÖĞÔªËØµÄ¹Ø¼ü×ÖÎªkey,Ôò²éÕÒ³É¹¦
+//è‹¥å•å…ƒHOä¸­å…ƒç´ çš„å…³é”®å­—ä¸ºkey,åˆ™æŸ¥æ‰¾æˆåŠŸ
 else 
 {
 for(int i=1;i<m;++i){
 Hi= (H0+i)%m;
-//°´ÕÕÏßĞÔÌ½²â·¨¼ÆËãÏÂÒ»¸öÉ¢ÁĞµØÖ·Hi
-if (HT[Hi].key==NULLKEY) return -1; //Èôµ¥ÔªHiÎª¿Õ£¬ÔòËù²éÔªËØ²»´æÔÚ
-else if (HT[Hi] .key=-key) return Hi;} //Èôµ¥ÔªHiÖĞÔªËØµÄ¹Ø¼ü×ÖÎªkey,Ôò²éÕÒ³É¹¦
+//æŒ‰ç…§çº¿æ€§æ¢æµ‹æ³•è®¡ç®—ä¸‹ä¸€ä¸ªæ•£åˆ—åœ°å€Hi
+if (HT[Hi].key==NULLKEY) return -1; //è‹¥å•å…ƒHiä¸ºç©ºï¼Œåˆ™æ‰€æŸ¥å…ƒç´ ä¸å­˜åœ¨
+else if (HT[Hi] .key=-key) return Hi;} //è‹¥å•å…ƒHiä¸­å…ƒç´ çš„å…³é”®å­—ä¸ºkey,åˆ™æŸ¥æ‰¾æˆåŠŸ
 //for
 return -1;}
 }
@@ -46,14 +46,14 @@ int CreatHash(HashTable &HT, int key)
 {
 int H0,Hi;
 H0=H(key) ;
-//¸ù¾İÉ¢ÁĞº¯ÊıH (key)¼ÆËãÉ¢ÁĞµØÖ·
+//æ ¹æ®æ•£åˆ—å‡½æ•°H (key)è®¡ç®—æ•£åˆ—åœ°å€
 if (HT [H0].key==NULLKEY) 
 HT[H0].key=key;
 else 
 {
 for(int i=1;i<m;++i){
 Hi=(H0+i)%m;
-//°´ÕÕÏßĞÔÌ½²â·¨¼ÆËãÏÂÒ»¸öÉ¢ÁĞµØÖ·Hi
+//æŒ‰ç…§çº¿æ€§æ¢æµ‹æ³•è®¡ç®—ä¸‹ä¸€ä¸ªæ•£åˆ—åœ°å€Hi
 if (HT[Hi].key==NULLKEY) HT[Hi].key=key; }
 }
 }
@@ -61,21 +61,21 @@ if (HT[Hi].key==NULLKEY) HT[Hi].key=key; }
 int main()
 {
     int a,b; HashTable HT;
-    printf("ÇëÊäÈëÊ®¶ş¸ö¹Ø¼ü×Ö£º");
+    printf("è¯·è¾“å…¥åäºŒä¸ªå…³é”®å­—ï¼š");
     for(int i=0;i<12;i++)
     {
         scanf("%d",&a);
         CreatHash(HT,a);
     }
-    printf("ÊäÈëÒª²éÕÒµÄ¹Ø¼ü×Ö£º");
+    printf("è¾“å…¥è¦æŸ¥æ‰¾çš„å…³é”®å­—ï¼š");
     scanf("%d",&a);
     b=SearchHash004(HT,a);
-    printf("Î»ÖÃÎª%d \n",b);
+    printf("ä½ç½®ä¸º%d \n",b);
     
-    printf("ÊäÈëÒª²éÕÒµÄ¹Ø¼ü×Ö£º");
+    printf("è¾“å…¥è¦æŸ¥æ‰¾çš„å…³é”®å­—ï¼š");
     scanf("%d",&a);
     b=SearchHash004(HT,a);
-    printf("Î»ÖÃÎª%d \n",b);
+    printf("ä½ç½®ä¸º%d \n",b);
     
     system("pause");
     return 0;
