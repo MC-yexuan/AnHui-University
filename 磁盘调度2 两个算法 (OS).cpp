@@ -4,15 +4,15 @@
 #include <stdlib.h>
 using namespace std;
 
-const char *name = "Âí´ŞìÇêÑ";
+const char *name = "é©¬å´”çƒ¨æš„";
 const char *ID = "E01914004";
 
 int data_[10] = {100,55,58,39,18,90,160,150,38,184};
 int start = 100;
 int move_[9];
 void CSCAN(int num){
-    cout << "Ñ­»·É¨ÃèËã·¨£º" << endl;
-    sort(data_,data_+10);//ÅÅĞò
+    cout << "å¾ªç¯æ‰«æç®—æ³•ï¼š" << endl;
+    sort(data_,data_+10);//æ’åº
     float total=0;
     int flag,mid=0;
     int data1_[9];
@@ -42,17 +42,17 @@ void CSCAN(int num){
         }
 
     }
-    printf("´Ó%dºÅ´ÅµÀ¿ªÊ¼\n",start);
+    printf("ä»%då·ç£é“å¼€å§‹\n",start);
     for(int i = 0;i < num; i++){
         cout << data1_[i] << "\t" << move_[i] <<endl;
     }
     float ave=total/num;
-    printf("Æ½¾ùÑ°µÀ³¤¶È£º%.1f\n\n",ave);
+    printf("å¹³å‡å¯»é“é•¿åº¦ï¼š%.1f\n\n",ave);
 }
 
 void SCAN(int num){
-    cout << "É¨ÃèËã·¨£º" << endl;
-    sort(data_,data_+10);//ÅÅĞò
+    cout << "æ‰«æç®—æ³•ï¼š" << endl;
+    sort(data_,data_+10);//æ’åº
     float total=0;
     int flag=0;int mid=0;
     int data1_[9];
@@ -83,12 +83,12 @@ void SCAN(int num){
         }
 
     }
-    printf("´Ó%dºÅ´ÅµÀ¿ªÊ¼\n",start);
+    printf("ä»%då·ç£é“å¼€å§‹\n",start);
     for(int i = 0;i < num; i++){
         cout << data1_[i] << "\t" << move1_[i] <<endl;
     }
     float ave=total/num;
-    printf("Æ½¾ùÑ°µÀ³¤¶È£º%.1f\n\n",ave);
+    printf("å¹³å‡å¯»é“é•¿åº¦ï¼š%.1f\n\n",ave);
 }
 
 
