@@ -6,35 +6,35 @@
 #include <queue>
 using namespace std;
 
-const char *name = "Âí´ŞìÇêÑ";
+const char *name = "é©¬å´”çƒ¨æš„";
 const char *ID = "E01914004";
 const int MAX = 99999;
 const int MIN = -99999;
-//¹Ì¶¨ÈıÖÖ×ÊÔ´
-//¶¨Òå½ø³Ì½á¹¹ÌåµÄÊôĞÔ
+//å›ºå®šä¸‰ç§èµ„æº
+//å®šä¹‰è¿›ç¨‹ç»“æ„ä½“çš„å±æ€§
 struct process
 {
-    char id;           //½ø³ÌÃû
-    int Max[3];        //×î´ó×ÊÔ´´óĞèÇó
-    int Allocation[3]; //ÒÑ·ÖÅä×ÊÔ´
-    int Need[3];       //»¹ĞèÒª¶àÉÙ×ÊÔ´
-    int Time[3];       //Õ¼ÓÃÊ±¼ä
+    char id;           //è¿›ç¨‹å
+    int Max[3];        //æœ€å¤§èµ„æºå¤§éœ€æ±‚
+    int Allocation[3]; //å·²åˆ†é…èµ„æº
+    int Need[3];       //è¿˜éœ€è¦å¤šå°‘èµ„æº
+    int Time[3];       //å ç”¨æ—¶é—´
 };
 
-struct allsafeue //°²È«¶ÓÁĞ
+struct allsafeue //å®‰å…¨é˜Ÿåˆ—
 {
     queue<char> safe;
     int alltime;
 };
 vector<allsafeue> safeues;
 
-int Available[3]; //Ê£Óà¿ÉÓÃ×ÊÔ´
-int time1[3];      //×ÊÔ´Õ¼ÓÃÊ±¼ä
-int processnum;   //ÓÃ»§¸öÊı
-int safeflag = 0; //ÏµÍ³°²È«±êÖ¾Î»
+int Available[3]; //å‰©ä½™å¯ç”¨èµ„æº
+int time1[3];      //èµ„æºå ç”¨æ—¶é—´
+int processnum;   //ç”¨æˆ·ä¸ªæ•°
+int safeflag = 0; //ç³»ç»Ÿå®‰å…¨æ ‡å¿—ä½
 
 int findmintime(vector<process> &processes)
-{ //ÕÒµ½Ê£Óà×îĞ¡Ê±¼ä
+{ //æ‰¾åˆ°å‰©ä½™æœ€å°æ—¶é—´
     int size = processes.size();
     int mintime = MAX;
     for (int i = 0; i < size; i++)
@@ -51,7 +51,7 @@ int findmintime(vector<process> &processes)
 }
 
 int findmaxtime(vector<process> &processes)
-{ //ÕÒµ½Ê£Óà×î´óÊ±¼ä
+{ //æ‰¾åˆ°å‰©ä½™æœ€å¤§æ—¶é—´
     int size = processes.size();
     int maxtime = MIN;
     for (int i = 0; i < size; i++)
@@ -67,7 +67,7 @@ int findmaxtime(vector<process> &processes)
     return maxtime;
 }
 
-void Print(vector<process> &processes) //Êä³öº¯Êı
+void Print(vector<process> &processes) //è¾“å‡ºå‡½æ•°
 {
     cout << "Available: ";
     for (int i = 0; i < 3; i++)
@@ -105,58 +105,58 @@ void Print(vector<process> &processes) //Êä³öº¯Êı
     cout << endl;
 }
 
-bool cmp(const allsafeue &a, const allsafeue &b) //´ÓĞ¡µ½´óÅÅĞò
+bool cmp(const allsafeue &a, const allsafeue &b) //ä»å°åˆ°å¤§æ’åº
 {
     if (a.alltime != b.alltime)
         return a.alltime < b.alltime;
 }
 
-void BA(vector<process> &processes, vector<process> &processes2, int Available[3], queue<char> safeue, int timeline) //ÒøĞĞ¼ÒËã·¨£¬processesÊÇÍêÕûµÄ
+void BA(vector<process> &processes, vector<process> &processes2, int Available[3], queue<char> safeue, int timeline) //é“¶è¡Œå®¶ç®—æ³•ï¼Œprocessesæ˜¯å®Œæ•´çš„
 {                                                                                                                  
     int ceaseflag = 0;                                                                                               
     int size = processes2.size();
-    int flag2 = 0;       //±íÊ¾´ËÊ±¸Ã¶ÓÁĞÊÇ·ñ°²È«
-    int midAvailable[3]; //Êı×é¿ÉÊÓ»¯£¬¸´ÖÆ
+    int flag2 = 0;       //è¡¨ç¤ºæ­¤æ—¶è¯¥é˜Ÿåˆ—æ˜¯å¦å®‰å…¨
+    int midAvailable[3]; //æ•°ç»„å¯è§†åŒ–ï¼Œå¤åˆ¶
     for (int i = 0; i < 3; i++)
     {
         midAvailable[i] = Available[i];
     }
     for (int i = 0; i < size; i++)
     {
-        int flag = 1; //±êÖ¾Î» ÅĞ¶Ï½ø³ÌÊÇ·ñ¿ÉÒÔµÃµ½×ÊÔ´·ÖÅä
+        int flag = 1; //æ ‡å¿—ä½ åˆ¤æ–­è¿›ç¨‹æ˜¯å¦å¯ä»¥å¾—åˆ°èµ„æºåˆ†é…
         for (int j = 0; j < 3; j++)
         {
-            if (processes2[i].Need[j] > midAvailable[j]) //¿É·ÖÅä×ÊÔ´²»×ã
+            if (processes2[i].Need[j] > midAvailable[j]) //å¯åˆ†é…èµ„æºä¸è¶³
             {
-                flag = 0; //±êÖ¾Î»ÖÃ0£¬±íÊ¾¸Ã½ø³Ì²»¿É±»·ÖÅä×ÊÔ´
-                break;    //Ìø³öforÑ­»·
+                flag = 0; //æ ‡å¿—ä½ç½®0ï¼Œè¡¨ç¤ºè¯¥è¿›ç¨‹ä¸å¯è¢«åˆ†é…èµ„æº
+                break;    //è·³å‡ºforå¾ªç¯
             }
         }
 
-        if (flag) //½ø³Ì¿É±»·ÖÅä
+        if (flag) //è¿›ç¨‹å¯è¢«åˆ†é…
         {
-            flag2 = 1; //±êÖ¾Ä¿Ç°¶ÓÁĞÊÇ·ñ¿É·ÖÅä
+            flag2 = 1; //æ ‡å¿—ç›®å‰é˜Ÿåˆ—æ˜¯å¦å¯åˆ†é…
             int Available2[3];
             for (int j = 0; j < 3; j++)
             {
-                Available2[j] = midAvailable[j] - processes2[i].Need[j]; //¸üĞÂ¿É·ÖÅä×ÊÔ´
+                Available2[j] = midAvailable[j] - processes2[i].Need[j]; //æ›´æ–°å¯åˆ†é…èµ„æº
                 int allsize = processes.size();
                 for (int k = 0; k < allsize; k++)
-                { //Ñ°ÕÒÏàÍ¬ÓÃ»§Ãû
+                { //å¯»æ‰¾ç›¸åŒç”¨æˆ·å
                     if (processes[k].id == processes2[i].id)
                     {
                         processes[k].Time[j] = time1[j];
                     }
                 }
             }
-            safeue.push(processes2[i].id);                                    //Ñ¹Èë°²È«¶ÓÁĞ
-            vector<process> processes3(processes2.begin(), processes2.end()); //¸´ÖÆ
-            processes3.erase(processes3.begin() + i);                         //ÈİÆ÷ÖĞÉ¾³ı¸ÃÔªËØ
+            safeue.push(processes2[i].id);                                    //å‹å…¥å®‰å…¨é˜Ÿåˆ—
+            vector<process> processes3(processes2.begin(), processes2.end()); //å¤åˆ¶
+            processes3.erase(processes3.begin() + i);                         //å®¹å™¨ä¸­åˆ é™¤è¯¥å…ƒç´ 
             if (!processes3.empty())
             {
-                BA(processes, processes3, Available2, safeue, timeline); //µİ¹éµ÷ÓÃÒøĞĞ¼ÒËã·¨
+                BA(processes, processes3, Available2, safeue, timeline); //é€’å½’è°ƒç”¨é“¶è¡Œå®¶ç®—æ³•
                 for (int i = 0; i < safeue.size() - 1; i++)
-                { // pop³ö×îºóÒ»¸öÔªËØ
+                { // popå‡ºæœ€åä¸€ä¸ªå…ƒç´ 
                     char mid = safeue.front();
                     safeue.pop();
                     safeue.push(mid);
@@ -165,50 +165,50 @@ void BA(vector<process> &processes, vector<process> &processes2, int Available[3
             }
         }
     }
-    if (flag2 == 0) //Ã»ÓĞ·ÖÅä¸øÈÎºÎ½ø³Ì,Ä¿Ç°²»°²È«
+    if (flag2 == 0) //æ²¡æœ‰åˆ†é…ç»™ä»»ä½•è¿›ç¨‹,ç›®å‰ä¸å®‰å…¨
     {
-        int mintime = findmintime(processes); //Éæ¼°µ½Time¾ØÕóÓÃprocesses
+        int mintime = findmintime(processes); //æ¶‰åŠåˆ°TimeçŸ©é˜µç”¨processes
         int allsize = processes.size();
-        if (mintime == MAX) //½áÊø
+        if (mintime == MAX) //ç»“æŸ
         {
             ceaseflag = 1;
         }
         else
         {
             timeline = timeline + mintime;
-            int Available3[3]; //µİ¹é×¼±¸
+            int Available3[3]; //é€’å½’å‡†å¤‡
             for (int i = 0; i < 3; i++)
             {
-                Available3[i] = midAvailable[i]; //±ØÒª³õÊ¼»¯ ÏÂÃæ¸üĞÂÊÇÒ»Î»Ò»Î»¸üĞÂ£¬
+                Available3[i] = midAvailable[i]; //å¿…è¦åˆå§‹åŒ– ä¸‹é¢æ›´æ–°æ˜¯ä¸€ä½ä¸€ä½æ›´æ–°ï¼Œ
             }
-            for (int i = 0; i < allsize; i++) //¸üĞÂÊ±¼ä¾ØÕó
+            for (int i = 0; i < allsize; i++) //æ›´æ–°æ—¶é—´çŸ©é˜µ
             {
                 for (int j = 0; j < 3; j++)
                 {
                     processes[i].Time[j] = processes[i].Time[j] - mintime;
                     if (processes[i].Time[j] == 0)
-                    {                                                          //µÈÓÚ×îĞ¡Ê±¼ä
-                        Available3[j] = midAvailable[j] + processes[i].Max[j]; //¸üĞÂ¿ÉÓÃ×ÊÔ´
+                    {                                                          //ç­‰äºæœ€å°æ—¶é—´
+                        Available3[j] = midAvailable[j] + processes[i].Max[j]; //æ›´æ–°å¯ç”¨èµ„æº
                     }
                     if (processes[i].Time[j] < 0)
-                    { //Ô­±¾Îª0£¬¸´Ô­
+                    { //åŸæœ¬ä¸º0ï¼Œå¤åŸ
                         processes[i].Time[j] = 0;
                     }
                 }
             }
-            BA(processes, processes2, Available3, safeue, timeline); //µİ¹éµ÷ÓÃÒøĞĞ¼ÒËã·¨
+            BA(processes, processes2, Available3, safeue, timeline); //é€’å½’è°ƒç”¨é“¶è¡Œå®¶ç®—æ³•
         }
     }
 
-    //´ËÊ±°²È«ĞÔËã·¨ÅĞ¶ÏÍê³É
-    if (safeue.size() == processnum) //Êä³ö°²È«ĞòÁĞ
+    //æ­¤æ—¶å®‰å…¨æ€§ç®—æ³•åˆ¤æ–­å®Œæˆ
+    if (safeue.size() == processnum) //è¾“å‡ºå®‰å…¨åºåˆ—
     {
         safeflag = 1;
         int maxt = findmaxtime(processes);
         timeline = timeline + maxt;
         allsafeue midsafeue;
         midsafeue.alltime = timeline;       
-        cout << "°²È«ĞòÁĞÎª£º";
+        cout << "å®‰å…¨åºåˆ—ä¸ºï¼š";
         while (!safeue.empty())
         {
             cout << safeue.front() << ' ';
@@ -216,55 +216,55 @@ void BA(vector<process> &processes, vector<process> &processes2, int Available[3
             safeue.pop();
         }
         cout << "time:" << timeline << endl;
-        safeues.push_back(midsafeue); //´æÈëallsafeueÊı×éÖĞ£¬µÈ´ıÅÅĞò¡£
+        safeues.push_back(midsafeue); //å­˜å…¥allsafeueæ•°ç»„ä¸­ï¼Œç­‰å¾…æ’åºã€‚
     }
 }
 
 int main()
 {
     cout << ID << " " << name << endl;
-    cout << "ÇëÊäÈë½ø³ÌµÄÊıÁ¿" << endl;
-    srand((unsigned)time(NULL));//²úÉúËæ»úÖÖ×Ó
+    cout << "è¯·è¾“å…¥è¿›ç¨‹çš„æ•°é‡" << endl;
+    srand((unsigned)time(NULL));//äº§ç”Ÿéšæœºç§å­
     
-    processnum = rand()%6+1;//ÓÃ»§Êı1-6
-    cout << "ÇëÏÈÊäÈë¿ÉÀûÓÃ×ÊÔ´¡¢¶ÔÓ¦×ÊÔ´Õ¼ÓÃÊ±¼ä£¬Ö®ºóÒÀ´ÎÊäÈëÒ»¸ö½ø³ÌµÄÃû×Ö¡¢ÒÑ·ÖÅä×ÊÔ´ºÍ»¹Ğè×ÊÔ´:" << endl;
-    vector<process> processes(processnum); //½¨Á¢ÏòÁ¿
+    processnum = rand()%6+1;//ç”¨æˆ·æ•°1-6
+    cout << "è¯·å…ˆè¾“å…¥å¯åˆ©ç”¨èµ„æºã€å¯¹åº”èµ„æºå ç”¨æ—¶é—´ï¼Œä¹‹åä¾æ¬¡è¾“å…¥ä¸€ä¸ªè¿›ç¨‹çš„åå­—ã€å·²åˆ†é…èµ„æºå’Œè¿˜éœ€èµ„æº:" << endl;
+    vector<process> processes(processnum); //å»ºç«‹å‘é‡
     for (int i = 0; i < 3; i++)
     {
-        Available[i] =rand()%5+1; //¿ÉÓÃ×ÊÔ´1-5
+        Available[i] =rand()%5+1; //å¯ç”¨èµ„æº1-5
     }
     for (int i = 0; i < 3; i++)
     {
-        time1[i] = rand()%3+1;//Õ¼ÓÃÊ±¼ä1-3
+        time1[i] = rand()%3+1;//å ç”¨æ—¶é—´1-3
     }
     for (int i = 0; i < processnum; i++)
     {
-        processes[i].id = 65+i;//ÒÀ´ÎÎªA\B\C...
+        processes[i].id = 65+i;//ä¾æ¬¡ä¸ºA\B\C...
         for (int j = 0; j < 3; j++)
         {
-            processes[i].Allocation[j] = rand()%5;//ÒÑ·ÖÅä0-4
+            processes[i].Allocation[j] = rand()%5;//å·²åˆ†é…0-4
         }
         for (int j = 0; j < 3; j++)
         {
-            processes[i].Need[j] = rand()%4;//ĞèÇó0-3
-            processes[i].Max[j] = processes[i].Allocation[j] + processes[i].Need[j]; //¼ÆËã×î´ó¾ØÕó
+            processes[i].Need[j] = rand()%4;//éœ€æ±‚0-3
+            processes[i].Max[j] = processes[i].Allocation[j] + processes[i].Need[j]; //è®¡ç®—æœ€å¤§çŸ©é˜µ
         }
-        for (int j = 0; j < 3; j++) //³õÊ¼»¯Ê±¼ä¾ØÕó
+        for (int j = 0; j < 3; j++) //åˆå§‹åŒ–æ—¶é—´çŸ©é˜µ
         {
             processes[i].Time[j] = 0;
         }
     }
-    cout << "ÒøĞĞ¼ÒËã·¨£º" << endl;
-    queue<char> safeue; //³õÊ¼°²È«¶ÓÁĞ
+    cout << "é“¶è¡Œå®¶ç®—æ³•ï¼š" << endl;
+    queue<char> safeue; //åˆå§‹å®‰å…¨é˜Ÿåˆ—
     int timeline = 0;
     Print(processes);
-    BA(processes, processes, Available, safeue, timeline); //Ê¹ÓÃÁ½´ÎprocessesÎªÁË±£ÁôÍêÕûÊ±¼ä¾ØÕó
+    BA(processes, processes, Available, safeue, timeline); //ä½¿ç”¨ä¸¤æ¬¡processesä¸ºäº†ä¿ç•™å®Œæ•´æ—¶é—´çŸ©é˜µ
     if (safeflag)
-    { //ÏµÍ³°²È«£¬ÅÅĞò
+    { //ç³»ç»Ÿå®‰å…¨ï¼Œæ’åº
         int n = safeues.size();
         sort(safeues.begin(), safeues.end(), cmp);
         cout << endl;
-        cout << "ÅÅĞòºóµÄ°²È«ĞòÁĞÎª£º" << endl; //Êä³ö
+        cout << "æ’åºåçš„å®‰å…¨åºåˆ—ä¸ºï¼š" << endl; //è¾“å‡º
         for (int i = 0; i < n; i++)
         {
             while (!safeues[i].safe.empty())
@@ -275,9 +275,9 @@ int main()
             cout << "time:" << safeues[i].alltime << endl;
         }
     }
-    if (!safeflag) //²»°²È«£¬±¨´í
+    if (!safeflag) //ä¸å®‰å…¨ï¼ŒæŠ¥é”™
     {
-        cout << "Alarm£¡¸ÃÏµÍ³²»°²È«£¡£¡£¡" << endl;
+        cout << "Alarmï¼è¯¥ç³»ç»Ÿä¸å®‰å…¨ï¼ï¼ï¼" << endl;
     }
     system("pause");
     return 0;
