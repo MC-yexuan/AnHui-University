@@ -3,25 +3,25 @@
 #include<string.h>
 using namespace std;
     
-    int flag[128];//¼ÇÂ¼ASCII ******
+    int flag[128];//è®°å½•ASCII ******
     class word
     {
     public:
-        int num=0,flag1=0,flag2=0;//flag1´Ó×óµ½ÓÒ£¬flag2´ÓÓÒµ½×ó¡£
+        int num=0,flag1=0,flag2=0;//flag1ä»å·¦åˆ°å³ï¼Œflag2ä»å³åˆ°å·¦ã€‚
     };
-    int mid[8];//¡®-¡¯»ØËİ
-    int n;//ĞĞÊı
+    int mid[8];//â€˜-â€™å›æº¯
+    int n;//è¡Œæ•°
     char c1;
-    //fg=0,Ê×Î²£»fg=1£¬£¿£»fg=2£¬*£»
+    //fg=0,é¦–å°¾ï¼›fg=1ï¼Œï¼Ÿï¼›fg=2ï¼Œ*ï¼›
     
     int main(){
     int k1=-1; int k2=-1;
-    ifstream in("input.txt");//ÒÔ»Ø³µ½áÎ²
+    ifstream in("input.txt");//ä»¥å›è½¦ç»“å°¾
     ofstream out("output.txt");
     memset(flag,-1,sizeof(flag));
-    word cword[128];word lie[128];//lieÓÃÀ´Çø·ÖÍ¬Ò»ĞĞÏàÍ¬ÔªËØ
-    word pcword[128];//ÓÃÀ´¡®-¡¯flag1»ØËİ£¨Ã»ÓĞ±ØÒª£¡£¡£¡Ö»ÊÇÎªÁË±ãÓÚµ÷ÊÔ£©
-    //³ıcwordÆäËû¶¼²»ÓÃnumÊôĞÔ¡£
+    word cword[128];word lie[128];//lieç”¨æ¥åŒºåˆ†åŒä¸€è¡Œç›¸åŒå…ƒç´ 
+    word pcword[128];//ç”¨æ¥â€˜-â€™flag1å›æº¯ï¼ˆæ²¡æœ‰å¿…è¦ï¼ï¼ï¼åªæ˜¯ä¸ºäº†ä¾¿äºè°ƒè¯•ï¼‰
+    //é™¤cwordå…¶ä»–éƒ½ä¸ç”¨numå±æ€§ã€‚
     for(int i=0;i<128;i++){
         lie[i].flag1=10; 
     }
@@ -29,17 +29,17 @@ using namespace std;
     int eof=in.eof();
     while(!eof)
     {
-        k1++;//¼ÆÊı
-        in.get(c1);             //È¡³öÎÄ¼şÖĞµÄ×ÖÄ¸
-        eof=in.eof();           //Ö¸ÏòÏÂÒ»¸ö
+        k1++;//è®¡æ•°
+        in.get(c1);             //å–å‡ºæ–‡ä»¶ä¸­çš„å­—æ¯
+        eof=in.eof();           //æŒ‡å‘ä¸‹ä¸€ä¸ª
         if(c1=='+') {
             int len=k1-2;
-            for(int i=0;i<=len;i++){//flag2,ÏàÍ¬È¡×îºóÃæµÄflag2
+            for(int i=0;i<=len;i++){//flag2,ç›¸åŒå–æœ€åé¢çš„flag2
                 cword[mid[i]].flag2=len-i;
                 if(cword[mid[i]].flag2>2)
                 cword[mid[i]].flag2=2;
             }
-             for(int i=len;i>=0;i--){//flag2,ÏàÍ¬È¡×îÇ°ÃæµÄflag2
+             for(int i=len;i>=0;i--){//flag2,ç›¸åŒå–æœ€å‰é¢çš„flag2
                 lie[mid[i]].flag2=len-i;
                 if(lie[mid[i]].flag2>2)
                 lie[mid[i]].flag2=2;
@@ -52,7 +52,7 @@ using namespace std;
                     }
                 }
             }
-            for(int i=0;i<128;i++){//ĞĞ½áÊø£¬ÖØÖÃlie.flag1,½øĞĞĞĞ±È½Ï´æ×î´óflag£¬²¢´æ´¢±¾´Îcword.flag
+            for(int i=0;i<128;i++){//è¡Œç»“æŸï¼Œé‡ç½®lie.flag1,è¿›è¡Œè¡Œæ¯”è¾ƒå­˜æœ€å¤§flagï¼Œå¹¶å­˜å‚¨æœ¬æ¬¡cword.flag
                 lie[i].flag1=10;
                 if(cword[i].flag1<pcword[i].flag1) cword[i].flag1=pcword[i].flag1;
                 if(cword[i].flag2<pcword[i].flag2) cword[i].flag2=pcword[i].flag2;
@@ -64,13 +64,13 @@ using namespace std;
         else if(c1==' '){continue;}
         
         else if(c1=='\n')
-        {k1=-1; k2++; memset(flag,-1,sizeof(flag));}    //ÖØĞÂ¼ÆÊı
+        {k1=-1; k2++; memset(flag,-1,sizeof(flag));}    //é‡æ–°è®¡æ•°
 
         else if(c1=='-'){       
             for(int i=k1-2;i>=0;i--)
                 cword[mid[i]].num=-100;
             k2--;
-            for(int i=0;i<128;i++){//ĞĞ½áÊø£¬ÖØÖÃlie.flag1,²¢»ØËİcword.flag1
+            for(int i=0;i<128;i++){//è¡Œç»“æŸï¼Œé‡ç½®lie.flag1,å¹¶å›æº¯cword.flag1
                 lie[i].flag1=10;
                 cword[i].flag1=pcword[i].flag1;
             } 
@@ -79,18 +79,18 @@ using namespace std;
         else {
             mid[k1]=(int)c1;//ASCII
 
-            if(lie[mid[k1]].flag1>k1){//¼ÇÍ¬Ò»ĞĞ×îĞ¡flag1
+            if(lie[mid[k1]].flag1>k1){//è®°åŒä¸€è¡Œæœ€å°flag1
                 lie[mid[k1]].flag1=k1;
                 if(lie[mid[k1]].flag1>2)
                     lie[mid[k1]].flag1=2;
                 }
-            //¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª
-            flag[mid[k1]]++;//ÏàÍ¬ÔªËØ¼ÇÒ»´Î
-            if(!flag[mid[k1]])//ÅĞ¶ÏÏàÍ¬ÔªËØ
+            //â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”
+            flag[mid[k1]]++;//ç›¸åŒå…ƒç´ è®°ä¸€æ¬¡
+            if(!flag[mid[k1]])//åˆ¤æ–­ç›¸åŒå…ƒç´ 
             cword[mid[k1]].num++;
             else{} 
             
-            if(cword[mid[k1]].flag1<k1){//¼ÇÍ¬Ò»ĞĞ×î´óflag1
+            if(cword[mid[k1]].flag1<k1){//è®°åŒä¸€è¡Œæœ€å¤§flag1
             cword[mid[k1]].flag1=k1;//flag1
             if(cword[mid[k1]].flag1>2)
                 cword[mid[k1]].flag1=2;
@@ -140,5 +140,5 @@ using namespace std;
     out.close();
     return 0;
     }
-//ÎÊÌâ£ºÏàÍ¬maxÊä³öASCIIĞ¡µÄ£¬¶ø²»ÊÇ×î¶Ì¡£2.Í¬Ò»×Ö·û´®ÏàÍ¬ÔªËØ»áÓ°Ïì£¿*(flag¼ÆÊıÎÊÌâ)
-//ÎÊÌâ2£ºÖ»ÓĞ- ÔÚ×îºó¼¸ĞĞ¿ÉÒÔ£¬Ó°ÏìFlag1£¨²»Ó°Ïì½á¹û£©
+//é—®é¢˜ï¼šç›¸åŒmaxè¾“å‡ºASCIIå°çš„ï¼Œè€Œä¸æ˜¯æœ€çŸ­ã€‚2.åŒä¸€å­—ç¬¦ä¸²ç›¸åŒå…ƒç´ ä¼šå½±å“ï¼Ÿ*(flagè®¡æ•°é—®é¢˜)
+//é—®é¢˜2ï¼šåªæœ‰- åœ¨æœ€åå‡ è¡Œå¯ä»¥ï¼Œå½±å“Flag1ï¼ˆä¸å½±å“ç»“æœï¼‰
