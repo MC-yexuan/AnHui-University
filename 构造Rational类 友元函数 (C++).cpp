@@ -6,20 +6,20 @@
 #include<time.h>
 #include<cstdlib>
 using namespace std;
-namespace Numeric {//	¶¨ÒåÒ»¸öÃüÃû¿Õ¼äNumeric£¬ÔÚ¸Ã¿Õ¼äÖĞ¶¨ÒåÀàRational;
+namespace Numeric {//	å®šä¹‰ä¸€ä¸ªå‘½åç©ºé—´Numericï¼Œåœ¨è¯¥ç©ºé—´ä¸­å®šä¹‰ç±»Rational;
 	class Rational
 	{
 	public:
-		//	±àĞ´Ä¬ÈÏ¹¹Ôìº¯Êı£¬¹¹ÔìÒ»¸öÓĞÀíÊı0
+		//	ç¼–å†™é»˜è®¤æ„é€ å‡½æ•°ï¼Œæ„é€ ä¸€ä¸ªæœ‰ç†æ•°0
 		Rational() {
 			numerator = 0; denominator = 1;
 		}
-		//	±àĞ´´ø²ÎÊıÁĞ±íµÄ¹¹Ôìº¯ÊıRational (int, int )£¬ÒªÇóÊ¹ÓÃ³õÊ¼»¯ÁĞ±í
+		//	ç¼–å†™å¸¦å‚æ•°åˆ—è¡¨çš„æ„é€ å‡½æ•°Rational (int, int )ï¼Œè¦æ±‚ä½¿ç”¨åˆå§‹åŒ–åˆ—è¡¨
 		Rational(int _x, int _y) :numerator(_x), denominator(_y) {
 		}
-		//¸´ÖÆ¹¹Ôìº¯Êı
+		//å¤åˆ¶æ„é€ å‡½æ•°
 		Rational(const Rational& a) :numerator(a.numerator), denominator(a.denominator) {}
-		//¸³Öµ²Ù×÷=
+		//èµ‹å€¼æ“ä½œ=
 		Rational& operator=(const Rational& a) {
 			if (this != &a) {
 				this->numerator = a.numerator;
@@ -27,7 +27,7 @@ namespace Numeric {//	¶¨ÒåÒ»¸öÃüÃû¿Õ¼äNumeric£¬ÔÚ¸Ã¿Õ¼äÖĞ¶¨ÒåÀàRational;
 			}
 			return *this;
 		}
-		//ËÄ¸öÓÑÔªº¯Êıadd¡¢sub¡¢mul¡¢div£¬¶ÔÁ½¸öRational¶ÔÏó±íÊ¾µÄÓĞÀíÊı·Ö±ğ½øĞĞÏà¼Ó¡¢Ïà¼õ¡¢Ïà³Ë¡¢Ïà³ıÔËËã£¬²¢ÖØÔØ
+		//å››ä¸ªå‹å…ƒå‡½æ•°addã€subã€mulã€divï¼Œå¯¹ä¸¤ä¸ªRationalå¯¹è±¡è¡¨ç¤ºçš„æœ‰ç†æ•°åˆ†åˆ«è¿›è¡Œç›¸åŠ ã€ç›¸å‡ã€ç›¸ä¹˜ã€ç›¸é™¤è¿ç®—ï¼Œå¹¶é‡è½½
 		friend Rational add(const Rational& a, const Rational& b) {
 			Rational c(a.numerator * b.denominator + a.denominator * b.numerator, b.denominator * a.denominator);
 			return c;
@@ -76,24 +76,24 @@ namespace Numeric {//	¶¨ÒåÒ»¸öÃüÃû¿Õ¼äNumeric£¬ÔÚ¸Ã¿Õ¼äÖĞ¶¨ÒåÀàRational;
 			Rational c(a.numerator, b * a.denominator);
 			return c;
 		}
-		//³ÉÔ±º¯ÊıgetValue()£¬·µ»ØÓÃ¸¡µãÊı±íÊ¾µÄÓĞÀíÊı
+		//æˆå‘˜å‡½æ•°getValue()ï¼Œè¿”å›ç”¨æµ®ç‚¹æ•°è¡¨ç¤ºçš„æœ‰ç†æ•°
 		float getValue()const {
 			if (denominator == 0) { cout << "error"; return 0; }
 			return (float)numerator / (float)denominator;
 		}
-		//ÓÑÔªº¯ÊılessThan£¬±È½ÏÁ½¸öÓĞÀíÊıµÄ´óĞ¡£¬·µ»ØboolÀàĞÍ
+		//å‹å…ƒå‡½æ•°lessThanï¼Œæ¯”è¾ƒä¸¤ä¸ªæœ‰ç†æ•°çš„å¤§å°ï¼Œè¿”å›boolç±»å‹
 		friend bool lessThan(const Rational& a, const Rational& b) {
 			if (a.numerator * b.denominator - a.denominator * b.numerator > 0)return 1;
 			else return 0;
 		}
-		//Îö¹¹º¯Êı
+		//ææ„å‡½æ•°
 		~Rational() {};
 
 	private:
-		int numerator;//·Ö×Ó
-		int denominator;//·ÖÄ¸
+		int numerator;//åˆ†å­
+		int denominator;//åˆ†æ¯
 	};
-	bool cmp(Rational& a, Rational& b)//ÅÅĞòËã·¨Ëùµ÷ÓÃµÄº¯Êı
+	bool cmp(Rational& a, Rational& b)//æ’åºç®—æ³•æ‰€è°ƒç”¨çš„å‡½æ•°
 	{
 		if (lessThan(a, b)) return 0;
 		else return 1;
@@ -103,25 +103,25 @@ using namespace Numeric;
 int main() {
 	srand(time(0));
 	Rational x[10];
-	for (int i = 0; i < 10; i++)//Ëæ»úÉú³ÉÓĞÀíÊı
+	for (int i = 0; i < 10; i++)//éšæœºç”Ÿæˆæœ‰ç†æ•°
 	{
 		x[i] = Rational(rand(), rand());
 	}
-	cout << "Î´ÅÅĞòµÄÓĞÀíÊı:" << endl;
-	for (int i = 0; i < 10; i++)//Êä³öÎ´ÅÅĞòµÄÓĞÀíÊı
+	cout << "æœªæ’åºçš„æœ‰ç†æ•°:" << endl;
+	for (int i = 0; i < 10; i++)//è¾“å‡ºæœªæ’åºçš„æœ‰ç†æ•°
 	{
 		cout << x[i].getValue() << endl;
 	}
 	cout << endl << endl;
-	sort(x, x + 10, lessThan);//ÓĞÀíÊıÅÅĞò
-	cout << "ÅÅĞòºóµÄÓĞÀíÊı:" << endl;
-	for (int i = 0; i < 10; i++)//ÓĞÀíÊıÅÅĞòºóÊä³ö
+	sort(x, x + 10, lessThan);//æœ‰ç†æ•°æ’åº
+	cout << "æ’åºåçš„æœ‰ç†æ•°:" << endl;
+	for (int i = 0; i < 10; i++)//æœ‰ç†æ•°æ’åºåè¾“å‡º
 	{
 		cout << x[i].getValue() << endl;
 	}
 	cout << endl << endl;
-	cout << "ÓĞÀíÊı¼Ó¼õ³Ë³ı¼ìÑé" << endl;
-	//ÓĞÀíÊı¼Ó¼õ³Ë³ı¼ìÑé
+	cout << "æœ‰ç†æ•°åŠ å‡ä¹˜é™¤æ£€éªŒ" << endl;
+	//æœ‰ç†æ•°åŠ å‡ä¹˜é™¤æ£€éªŒ
 	cout << add(x[0], x[1]).getValue() << endl;
 	cout << add(x[0], 1).getValue() << endl;
 	cout << add(1, x[0]).getValue() << endl;
