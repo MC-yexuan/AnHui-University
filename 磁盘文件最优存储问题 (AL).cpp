@@ -1,4 +1,4 @@
-//¸ÅÂÊ×î´óµÄÁ½¸öÎÄ¼şÖ®¼äµÄ¾àÀë×îĞ¡
+//æ¦‚ç‡æœ€å¤§çš„ä¸¤ä¸ªæ–‡ä»¶ä¹‹é—´çš„è·ç¦»æœ€å°
 #include<fstream>
 #include<iostream>
 #include<algorithm>
@@ -19,21 +19,21 @@ using namespace std;
     int eof=in.eof();
     while(!eof)
     {
-        in >> i1;             //È¡³öÎÄ¼şÖĞµÄÊı×Ö
-        eof=in.eof();           //Ö¸ÏòÏÂÒ»¸ö
+        in >> i1;             //å–å‡ºæ–‡ä»¶ä¸­çš„æ•°å­—
+        eof=in.eof();           //æŒ‡å‘ä¸‹ä¸€ä¸ª
         if(!eof){
             if(!k1)
                 num=i1;
             else
             path[k1]=i1; 
         }  
-        k1++;//¼ÆÊı      
+        k1++;//è®¡æ•°      
     }
     sort(path,path+10);
-    reverse(path,path+10);//ÄæĞò
+    reverse(path,path+10);//é€†åº
     
     int*p=path;
-    int all=0;//ÇóºÍ
+    int all=0;//æ±‚å’Œ
     while(*p){
         all=all+*p;
         p++;
@@ -41,7 +41,7 @@ using namespace std;
 
     int mid=num/2;int midd=mid;
     int lmid=mid; int rmid=mid;
-    for(int i=0;i<num;i++){//È·¶¨´æ´¢Î»ÖÃ
+    for(int i=0;i<num;i++){//ç¡®å®šå­˜å‚¨ä½ç½®
         if(i&&(i%2)){
             lmid--;
             midd=lmid;
