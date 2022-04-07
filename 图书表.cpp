@@ -8,27 +8,27 @@
 #define overflow -2
 typedef int Status;
 
-#define MAXSIZE 100     //Í¼Êé±í¿ÉÄÜ´ïµ½µÄ×î´ó³¤¶È
-typedef struct {           //Í¼ÊéĞÅÏ¢¶¨Òå
-char no[10];            //ÊéºÅ
-char name [50] ;         //ÊéÃû
-int price;               //¼Û¸ñ
+#define MAXSIZE 100     //å›¾ä¹¦è¡¨å¯èƒ½è¾¾åˆ°çš„æœ€å¤§é•¿åº¦
+typedef struct {           //å›¾ä¹¦ä¿¡æ¯å®šä¹‰
+char no[10];            //ä¹¦å·
+char name [50] ;         //ä¹¦å
+int price;               //ä»·æ ¼
 }book;
 
 typedef struct {
-book *elem;            //´æ´¢¿Õ¼äµÄ»ùµØÖ·
-int length;             //Í¼Êé±íÖĞµ±Ç°Í¼Êé¸öÊı
+book *elem;            //å­˜å‚¨ç©ºé—´çš„åŸºåœ°å€
+int length;             //å›¾ä¹¦è¡¨ä¸­å½“å‰å›¾ä¹¦ä¸ªæ•°
 }SqList;
 
 
-Status InitList004(SqList &L){ //³õÊ¼»¯ 
+Status InitList004(SqList &L){ //åˆå§‹åŒ– 
 	L.elem=new book[MAXSIZE];
 	if(!L.elem) return(overflow);
 	L.length=0;
 	return OK;
 }
 
-Status ListInsert004(SqList &L,int i,book e) //²åÈëÔªËØ 
+Status ListInsert004(SqList &L,int i,book e) //æ’å…¥å…ƒç´  
 {
 	int j;
 	if((i<1)||(i>L.length+1)) return ERROR;
@@ -40,7 +40,7 @@ Status ListInsert004(SqList &L,int i,book e) //²åÈëÔªËØ
 	return OK;
 }
 
-void input004 (SqList L){ //Êä³ö±í 
+void input004 (SqList L){ //è¾“å‡ºè¡¨ 
     int i=1;
     while(L.length!=i-1){
     	printf("%s %s %d\n",L.elem[i].no,L.elem[i].name,L.elem[i].price);
@@ -49,66 +49,66 @@ void input004 (SqList L){ //Êä³ö±í
 	printf("\n");
  }
 
-void InsertSort004 (SqList L){//¶ÔË³Ğò±íL×öÖ±½Ó²åÈëÅÅĞò
+void InsertSort004 (SqList L){//å¯¹é¡ºåºè¡¨Låšç›´æ¥æ’å…¥æ’åº
 int i,j;
 for(i-2;i<=L.length;++i)
-if(L.elem[i].price>L.elem[i-1].price) //¡°>",Ğè½«r[i]²åÈëÓĞĞò×Ó±í
+if(L.elem[i].price>L.elem[i-1].price) //â€œ>",éœ€å°†r[i]æ’å…¥æœ‰åºå­è¡¨
 {
 L.elem[0]=L.elem[i];
-//½«´ı²åÈËµÄ¼ÇÂ¼Ôİ´æµ½¼àÊÓÉÚÖĞ
+//å°†å¾…æ’äººçš„è®°å½•æš‚å­˜åˆ°ç›‘è§†å“¨ä¸­
 L.elem[i]=L.elem[i-1];
-//r[i-1]ºóÒÆ
-for(j=i-2; L.elem[0].price>L.elem[j].price; --j) //´ÓºóÏòÇ°Ñ°ÕÒ²åÈëÎ»ÖÃ
+//r[i-1]åç§»
+for(j=i-2; L.elem[0].price>L.elem[j].price; --j) //ä»åå‘å‰å¯»æ‰¾æ’å…¥ä½ç½®
 L.elem[j+1]=L.elem[j];
-//¼ÇÂ¼Öğ¸öºóÒÆ£¬ Ö±µ½ÕÒµ½²åÈËÎ»ÖÃ
+//è®°å½•é€ä¸ªåç§»ï¼Œ ç›´åˆ°æ‰¾åˆ°æ’äººä½ç½®
 L.elem [j+1]=L.elem[0];
-//½«r[0)¼´Ô­r[1].²åÈËµ½ÕıÈ·Î»ÖÃ
+//å°†r[0)å³åŸr[1].æ’äººåˆ°æ­£ç¡®ä½ç½®
 }//if
 }
 
 int SearchBin004 (SqList L, int i)
-{//ÔÚÓĞĞò±íSTÖĞÕÛ°ë²éÕÒÆä¹Ø¼ü×ÖµÈÓÚkeyµÄÊı¾İÔªËØ¡£ÈôÕÒµ½£¬Ôòº¯ÊıÖµÎª¸ÃÔªËØÔÚ±íÖĞµÄÎ»ÖÃ£¬·ñÔòÎª0
+{//åœ¨æœ‰åºè¡¨STä¸­æŠ˜åŠæŸ¥æ‰¾å…¶å…³é”®å­—ç­‰äºkeyçš„æ•°æ®å…ƒç´ ã€‚è‹¥æ‰¾åˆ°ï¼Œåˆ™å‡½æ•°å€¼ä¸ºè¯¥å…ƒç´ åœ¨è¡¨ä¸­çš„ä½ç½®ï¼Œå¦åˆ™ä¸º0
 int low,high,mid;
 low=1;high=L.length;
-//ÖÃ²éÕÒÇø¼ä³õÖµ
+//ç½®æŸ¥æ‰¾åŒºé—´åˆå€¼
 while (low<=high)
 {mid= (low+high) /2;
 if (i==L.elem[mid].price) return mid;
-//ÕÒµ½´ı²éÔªËØ
+//æ‰¾åˆ°å¾…æŸ¥å…ƒç´ 
 else if (i>L.elem[mid].price) high=mid-1;
-//¼ÌĞøÔÚÇ°Ò»×Ó±í½øĞĞ²éÕÒ
+//ç»§ç»­åœ¨å‰ä¸€å­è¡¨è¿›è¡ŒæŸ¥æ‰¾
 else low=mid+1;}
-//¼ÌĞøÔÚºóÒ»×Ó±í½øĞĞ²éÕÒ
+//ç»§ç»­åœ¨åä¸€å­è¡¨è¿›è¡ŒæŸ¥æ‰¾
 //while
 return 0;}
-//±íÖĞ²»´æÔÚ´ı²éÔªËØ
+//è¡¨ä¸­ä¸å­˜åœ¨å¾…æŸ¥å…ƒç´ 
 
 
-int main()   //Ö÷º¯Êı 
+int main()   //ä¸»å‡½æ•° 
  {
   SqList Sq;
 	InitList004(Sq);
 	int i,j,p;
   book a[8];
-  printf("ÇëÊäÈëÊéºÅ¡¢ÊéÃû¡¢¼Û¸ñ£¨ÓÃ¿Õ¸ñ·Ö¸ô£©\n");
+  printf("è¯·è¾“å…¥ä¹¦å·ã€ä¹¦åã€ä»·æ ¼ï¼ˆç”¨ç©ºæ ¼åˆ†éš”ï¼‰\n");
   for(i=0;i>=0;i++)
   {scanf("%s %s %d",&a[i].no,&a[i].name,&a[i].price);
   if(a[i].price==0) break; 
    ListInsert004(Sq,i+1,a[i]);
   }
-printf("(2)Í¼Êé±¾Êı: %d\nÍ¼ÊéĞÅÏ¢£º\n",Sq.length);
+printf("(2)å›¾ä¹¦æœ¬æ•°: %d\nå›¾ä¹¦ä¿¡æ¯ï¼š\n",Sq.length);
 input004(Sq);
 
-printf("(3)°´ÕÕ¼Û¸ñ½µĞòÅÅĞòµÄÍ¼ÊéĞÅÏ¢£º\n");
+printf("(3)æŒ‰ç…§ä»·æ ¼é™åºæ’åºçš„å›¾ä¹¦ä¿¡æ¯ï¼š\n");
 InsertSort004(Sq);
 input004(Sq);  
 
-printf("(4)ÕÛ°ë²éÕÒ\n");
+printf("(4)æŠ˜åŠæŸ¥æ‰¾\n");
 for(j=0;j>=0;j++)
 {scanf("%d",&p);
 if(p==0) break;
 i=SearchBin004(Sq,p);
-if(i==0) printf("±§Ç¸£¬¸Ã¼Û¸ñµÄÍ¼Êé²»´æÔÚ\n");	
+if(i==0) printf("æŠ±æ­‰ï¼Œè¯¥ä»·æ ¼çš„å›¾ä¹¦ä¸å­˜åœ¨\n");	
 else printf("%s %s %d\n",Sq.elem[i].no,Sq.elem[i].name,Sq.elem[i].price);
 }
 
