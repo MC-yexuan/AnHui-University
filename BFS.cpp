@@ -3,17 +3,17 @@ using namespace std;
 #define MAX 100001
 int step[101][101];
 char a[101][101];
-int q1, q2, z1, z2;//Æğµã£¬ÖÕµã
+int q1, q2, z1, z2;//èµ·ç‚¹ï¼Œç»ˆç‚¹
 int n;
-int jud(int i, int j){//ÅĞ¶Ï³ö½ç»òÓĞÕÏ°­
+int jud(int i, int j){//åˆ¤æ–­å‡ºç•Œæˆ–æœ‰éšœç¢
 	if (i < 0 || j < 0 || i >= n || j >= n || a[i][j] == '#')
 		return 0;
 	return 1;
 }
 void bfs(int i, int j){
 	int x = step[i][j];
-	//ËÄ¸ö·½Ïò
-    if (jud(i + 1, j)){//¿ÉĞĞ
+	//å››ä¸ªæ–¹å‘
+    if (jud(i + 1, j)){//å¯è¡Œ
 		if (x + 1 < step[i + 1][j]){
 			step[i + 1][j] = x + 1;
 			bfs(i + 1, j);
@@ -61,7 +61,7 @@ int main(){
 		}
 		step[q1][q2] = 0;
 		bfs(q1, q2);
-		if (step[z1][z2] == MAX)//´ÓÎ´µ½´ïÖÕµã
+		if (step[z1][z2] == MAX)//ä»æœªåˆ°è¾¾ç»ˆç‚¹
 			printf("-1");
 		else
 		printf("%d", step[z1][z2]);
