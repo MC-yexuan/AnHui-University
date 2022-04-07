@@ -10,7 +10,7 @@ int n[50],path[5],npath[50][5],n1[50];
 int num,space;
 ifstream in("input.txt");
 ofstream out("output.txt");
-typedef struct BiNode{//Ê÷µÄ¶¨Òå
+typedef struct BiNode{//æ ‘çš„å®šä¹‰
     int weight=0;
     int value=0;
     struct BiNode *lchild,*rchild; 
@@ -35,7 +35,7 @@ bool Constraint(int weight){
 }
 
 int j=0;
-    void Backtrack(int t,BiTree T){//tÊÇµ±Ç°Éî¶È 1£¬nÊÇÊ÷µÄÉî¶È 5;vÊÇ×Ü¼ÛÖµ
+    void Backtrack(int t,BiTree T){//tæ˜¯å½“å‰æ·±åº¦ 1ï¼Œnæ˜¯æ ‘çš„æ·±åº¦ 5;væ˜¯æ€»ä»·å€¼
         if(t>num) {//cout<<T->value<<"  ";
         n[j]=n1[j]=T->value;
         for(int i=0;i<num;i++){
@@ -44,18 +44,18 @@ int j=0;
             }
             //cout<<endl;
             j++;
-        }//Êä³ö¿ÉĞĞ½â
+        }//è¾“å‡ºå¯è¡Œè§£
         else{
-            for(int i=0;i<=1;i++){//0´ú±íÓĞ£¬1´ú±íÎŞ
+            for(int i=0;i<=1;i++){//0ä»£è¡¨æœ‰ï¼Œ1ä»£è¡¨æ— 
                 if(i==0){
-                    path[t-1]=1;//×ó×ÓÊ÷
+                    path[t-1]=1;//å·¦å­æ ‘
                     T->lchild->value=T->value+val[t-1];
                     T->lchild->weight=T->weight+wei[t-1];      
                 }
                 else{
                     path[t-1]=0;
-                    T->rchild->value=T->value;//×ßÓÒ×ÓÊ÷
-                    T->rchild->weight=T->weight;//×ßÓÒ×ÓÊ÷
+                    T->rchild->value=T->value;//èµ°å³å­æ ‘
+                    T->rchild->weight=T->weight;//èµ°å³å­æ ‘
                     Backtrack(t+1,T->rchild); 
                 }
                
@@ -68,13 +68,13 @@ int j=0;
 
     int main(){
     int eof=in.eof();
-    int k1=0;//¼ÆÊı
+    int k1=0;//è®¡æ•°
     int i1;char ch;int flag=0;
     while(!eof)
     {
-        in >> i1;             //È¡³öÎÄ¼şÖĞµÄÊı×Ö
-        eof=in.eof();           //Ö¸ÏòÏÂÒ»¸ö
-        in.get(ch);           //È¡×Ö·û
+        in >> i1;             //å–å‡ºæ–‡ä»¶ä¸­çš„æ•°å­—
+        eof=in.eof();           //æŒ‡å‘ä¸‹ä¸€ä¸ª
+        in.get(ch);           //å–å­—ç¬¦
         if(!eof){
             
             if(!k1&&!flag)
@@ -96,13 +96,13 @@ int j=0;
                 }
             }
         }  
-        k1++;//¼ÆÊı      
+        k1++;//è®¡æ•°      
     }
          BiTree T;
         CreateBiTree(T,0);
         Backtrack(1,T);
         sort(n,n+50);
-        reverse(n,n+50);//ÄæĞò
+        reverse(n,n+50);//é€†åº
         int max=n[0];
         cout<<max<<endl;
         out<<max<<endl;
