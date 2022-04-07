@@ -5,14 +5,14 @@
 #define NONE -1
 using namespace std;
  
-const char *name = "Âí´ŞìÇêÑ";
+const char *name = "é©¬å´”çƒ¨æš„";
 const char *ID = "E01914004";
 
  
-deque<int> memoryList;//Ë«Ïò¶ÓÁĞ
+deque<int> memoryList;//åŒå‘é˜Ÿåˆ—
 deque<int> pageList;
  
-void initMemory(int memorySize){//³õÊ¼»¯
+void initMemory(int memorySize){//åˆå§‹åŒ–
 	for(int i=0;i<memorySize;i++){
 		int temp;
 		temp = NONE;
@@ -21,10 +21,10 @@ void initMemory(int memorySize){//³õÊ¼»¯
  
 }
  
-void FIFO(int num){//ÏÈ½øÏÈ³öËã·¨
+void FIFO(int num){//å…ˆè¿›å…ˆå‡ºç®—æ³•
 	float replace_count=0;
 	int position=0;
-	cout<<"\nÒ³±í      Ìæ»»         ÄÚÈİ\n";
+	cout<<"\né¡µè¡¨      æ›¿æ¢         å†…å®¹\n";
 	for(int i=0;i<pageList.size();i++){
         cout<<pageList[i]<<"         ";
 		int j=0;
@@ -36,7 +36,7 @@ void FIFO(int num){//ÏÈ½øÏÈ³öËã·¨
 		}
 		if(j==memoryList.size()){
 			replace_count++;
-			printf("%d±»%dÌæ»»µô£¡  ", memoryList[position],pageList[i]);
+			printf("%dè¢«%dæ›¿æ¢æ‰ï¼  ", memoryList[position],pageList[i]);
 			memoryList[position] = pageList[i];
 			position = (position+1)%memoryList.size();
 		}else{
@@ -52,45 +52,45 @@ void FIFO(int num){//ÏÈ½øÏÈ³öËã·¨
 	}
 	float lack =replace_count + memoryList.size();
  
-	cout<<"\nÖÃ»»ÂÊÎª£º"<<replace_count<<"/"<<num<<"="<<replace_count/num<<endl;
-    cout<<"\nÈ±Ò³ÂÊÎª£º"<<lack<<"/"<<num<<"="<<lack/num<<endl;
+	cout<<"\nç½®æ¢ç‡ä¸ºï¼š"<<replace_count<<"/"<<num<<"="<<replace_count/num<<endl;
+    cout<<"\nç¼ºé¡µç‡ä¸ºï¼š"<<lack<<"/"<<num<<"="<<lack/num<<endl;
 }
 
-void BEST(int num){//×î¼ÑÖÃ»»Ëã·¨
+void BEST(int num){//æœ€ä½³ç½®æ¢ç®—æ³•
 	float replace_count=0;
 	int position=0;
-	cout<<"\nÒ³±í      Ìæ»»         ÄÚÈİ\n";
+	cout<<"\né¡µè¡¨      æ›¿æ¢         å†…å®¹\n";
 	for(int i=0;i<pageList.size();i++){
-        cout<<pageList[i]<<"         ";//Ò³±í
+        cout<<pageList[i]<<"         ";//é¡µè¡¨
 		int j=0;
 		for(j=0;j<memoryList.size();j++){
-			if(memoryList[j]==NONE||memoryList[j]==pageList[i]){//²»ÊôÓÚÌæ»»
+			if(memoryList[j]==NONE||memoryList[j]==pageList[i]){//ä¸å±äºæ›¿æ¢
 				memoryList[j]=pageList[i];
 				break;
 			}
 		}
-		if(j==memoryList.size()){//ĞèÒªÌæ»»
+		if(j==memoryList.size()){//éœ€è¦æ›¿æ¢
 			replace_count++;
             int mid=0;
             vector<int> midd (memoryList.size());
-            for(int m=i; m < pageList.size(); m++ ){//ÕÒ×îÔ¶Î´Ê¹ÓÃ
+            for(int m=i; m < pageList.size(); m++ ){//æ‰¾æœ€è¿œæœªä½¿ç”¨
                 for(int n=0; n < memoryList.size(); n++){
                     if(memoryList[n] == pageList[m]){
                         if(!midd[n]){
                             mid=n;
                         }
-                        midd[n]=1;//±êÖ¾Î»
+                        midd[n]=1;//æ ‡å¿—ä½
                     }
                 }
             }
-            for(int m=0 ; m< memoryList.size() ;m++){//ÊÇ·ñÓĞ´ÓÎ´±»Ê¹ÓÃµÄ
+            for(int m=0 ; m< memoryList.size() ;m++){//æ˜¯å¦æœ‰ä»æœªè¢«ä½¿ç”¨çš„
                 if(!midd[m]){
                 mid = m;
                 break;
                 }
             }
 
-			printf("%d±»%dÌæ»»µô£¡  ", memoryList[mid],pageList[i]);
+			printf("%dè¢«%dæ›¿æ¢æ‰ï¼  ", memoryList[mid],pageList[i]);
 			memoryList[mid] = pageList[i];
 		}else{
 		    printf("              ");
@@ -105,45 +105,45 @@ void BEST(int num){//×î¼ÑÖÃ»»Ëã·¨
 	}
 	float lack =replace_count + memoryList.size();
  
-	cout<<"\nÖÃ»»ÂÊÎª£º"<<replace_count<<"/"<<num<<"="<<replace_count/num<<endl;
-    cout<<"\nÈ±Ò³ÂÊÎª£º"<<lack<<"/"<<num<<"="<<lack/num<<endl;
+	cout<<"\nç½®æ¢ç‡ä¸ºï¼š"<<replace_count<<"/"<<num<<"="<<replace_count/num<<endl;
+    cout<<"\nç¼ºé¡µç‡ä¸ºï¼š"<<lack<<"/"<<num<<"="<<lack/num<<endl;
 }
 
-void LRU(int num){//×î½ü×î¾ÃÎ´Ê¹ÓÃËã·¨
+void LRU(int num){//æœ€è¿‘æœ€ä¹…æœªä½¿ç”¨ç®—æ³•
 	float replace_count=0;
 	int position=0;
-	cout<<"\nÒ³±í      Ìæ»»         ÄÚÈİ\n";
+	cout<<"\né¡µè¡¨      æ›¿æ¢         å†…å®¹\n";
 	for(int i=0;i<pageList.size();i++){
-        cout<<pageList[i]<<"         ";//Ò³±í
+        cout<<pageList[i]<<"         ";//é¡µè¡¨
 		int j=0;
 		for(j=0;j<memoryList.size();j++){
-			if(memoryList[j]==NONE||memoryList[j]==pageList[i]){//²»ÊôÓÚÌæ»»
+			if(memoryList[j]==NONE||memoryList[j]==pageList[i]){//ä¸å±äºæ›¿æ¢
 				memoryList[j]=pageList[i];
 				break;
 			}
 		}
-		if(j==memoryList.size()){//ĞèÒªÌæ»»
+		if(j==memoryList.size()){//éœ€è¦æ›¿æ¢
 			replace_count++;
             int mid=0;
             vector<int> midd (memoryList.size());
-            for(int m=i; m >= 0; m-- ){//ÕÒ×î½ü×î¾ÃÎ´Ê¹ÓÃ 
+            for(int m=i; m >= 0; m-- ){//æ‰¾æœ€è¿‘æœ€ä¹…æœªä½¿ç”¨ 
                 for(int n=0; n < memoryList.size(); n++){
                     if(memoryList[n] == pageList[m]){
                         if(!midd[n]){
                             mid=n;
                         }
-                        midd[n]=1;//±êÖ¾Î»
+                        midd[n]=1;//æ ‡å¿—ä½
                     }
                 }
             }
-            for(int m=0 ; m< memoryList.size() ;m++){//ÊÇ·ñÓĞ´ÓÎ´±»Ê¹ÓÃµÄ
+            for(int m=0 ; m< memoryList.size() ;m++){//æ˜¯å¦æœ‰ä»æœªè¢«ä½¿ç”¨çš„
                 if(!midd[m]){
                 mid = m;
                 break;
                 }
             }
 
-			printf("%d±»%dÌæ»»µô£¡  ", memoryList[mid],pageList[i]);
+			printf("%dè¢«%dæ›¿æ¢æ‰ï¼  ", memoryList[mid],pageList[i]);
 			memoryList[mid] = pageList[i];
 		}else{
 		    printf("              ");
@@ -158,18 +158,18 @@ void LRU(int num){//×î½ü×î¾ÃÎ´Ê¹ÓÃËã·¨
 	}
 	float lack =replace_count + memoryList.size();
  
-	cout<<"\nÖÃ»»ÂÊÎª£º"<<replace_count<<"/"<<num<<"="<<replace_count/num<<endl;
-    cout<<"\nÈ±Ò³ÂÊÎª£º"<<lack<<"/"<<num<<"="<<lack/num<<endl;
+	cout<<"\nç½®æ¢ç‡ä¸ºï¼š"<<replace_count<<"/"<<num<<"="<<replace_count/num<<endl;
+    cout<<"\nç¼ºé¡µç‡ä¸ºï¼š"<<lack<<"/"<<num<<"="<<lack/num<<endl;
 }
 
 int main(){
 	int num = 20;
-	cout<<"ÊäÈëÁ÷£º"<<endl;
+	cout<<"è¾“å…¥æµï¼š"<<endl;
 	int arrayList[20] = {7,0,1,2,0,3,0,4,2,3,0,3,2,1,2,0,1,7,0,1};
 	initMemory(3);
 	for(int i=0;i<num;i++){
 		pageList.push_back(arrayList[i]);
-		cout<<pageList[i]<<" ";//Êä³öÊäÈëÁ÷
+		cout<<pageList[i]<<" ";//è¾“å‡ºè¾“å…¥æµ
 	}
 	cout<<endl;
     cout << ID<<" "<<name << endl;
