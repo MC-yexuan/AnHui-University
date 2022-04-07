@@ -27,8 +27,8 @@ int main(){
     int eof=in.eof();
     while(!eof)
     {
-        in >> i1;             //È¡³öÎÄ¼şÖĞµÄÊı×Ö
-        eof=in.eof();           //Ö¸ÏòÏÂÒ»¸ö
+        in >> i1;             //å–å‡ºæ–‡ä»¶ä¸­çš„æ•°å­—
+        eof=in.eof();           //æŒ‡å‘ä¸‹ä¸€ä¸ª
         if(!eof){
             if(!k1)
                 n=i1;
@@ -38,7 +38,7 @@ int main(){
             else
             path[k1-2]=i1; 
         }  
-        k1++;//¼ÆÊı      
+        k1++;//è®¡æ•°      
     }
     out<<greedy(path,n,k)<<endl;
     return 0;
